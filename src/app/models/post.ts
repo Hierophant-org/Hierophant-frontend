@@ -1,5 +1,5 @@
 import { Image } from './image';
-import { User } from './../../../../../../../target/classes/hierophant-site/src/app/models/user';
+import { User } from './user';
 export class Post {
     postId: number;
     title: string;

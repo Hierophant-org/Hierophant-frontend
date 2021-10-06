@@ -33,7 +33,12 @@ export class UserService { // this service is only responsible for one thing: ma
   }
 
   // GET
-
+  public loginUser(user: User): Observable<User> {
+    return this.http.post<User>(`${url}/users/login`, user, this.httpOptions) // url, user, this.httpOptions
+      .pipe( // we are calling a method on the data returned in the observable
+        catchError(this.handleError) // passing a callback
+      )
+  }
   // DELETE
 
   // create a method called handleError which will be invoked if something goes wrong in our http requests

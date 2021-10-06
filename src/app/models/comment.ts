@@ -1,4 +1,4 @@
-import { User } from './../../../../../../../target/classes/hierophant-site/src/app/models/user';
+import { User } from './user'
 import { Post } from './post';
 export class Comment {
 
