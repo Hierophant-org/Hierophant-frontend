@@ -10,14 +10,14 @@ export class Comment {
 
     constructor(
         comId: number,
-        userId: User,
-        postId: Post,
+        user: User,
+        post: Post,
         commText: string,
         upvotes: number
     ) {
         this.comId = comId
-        this.userId = userId
-        this.postId = postId
+        this.userId = user
+        this.postId = post
         this.commText = commText
         this.upvotes = upvotes
     }

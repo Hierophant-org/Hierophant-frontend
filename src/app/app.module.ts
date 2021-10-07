@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './components/toast/toast.component';
+import { PostCreationComponent } from './components/post-creation/post-creation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ToastComponent } from './components/toast/toast.component';
     NavComponent,
     PostComponent,
     MainComponent,
-    ToastComponent
+    ToastComponent,
+    PostCreationComponent
   ],
   imports: [
     BrowserModule,

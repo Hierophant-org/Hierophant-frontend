@@ -1,3 +1,4 @@
+import { PostCreationComponent } from './components/post-creation/post-creation.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +11,7 @@ const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'create', component: PostCreationComponent},
   {path: '**', component: MainComponent}
 
 ];
