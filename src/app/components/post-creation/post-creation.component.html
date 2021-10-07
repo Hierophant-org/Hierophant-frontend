@@ -1,0 +1,25 @@
+<div>
+    <div>
+        <h2 class="card-header text-center">{{ title }}</h2>
+    </div>
+
+    <div class="card-body text-center">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputTitle">Post Title</label>
+                    <input [(ngModel)]="post.title" type="text" name="title" class="form-control" id="inputTitle">
+
+                    <label for="inputTitle">Image Top Text</label>
+                    <input [(ngModel)]="image.topText" type="text" name="topText" class="form-control" id="inputTop">
+
+                    <label for="inputTitle">Image Bottom Text </label>
+                    <input [(ngModel)]="image.bottomText" type="text" name="bottomText" class="form-control"
+                        id="inputBottom">
+
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="createPost()">Share</button>
+        </form>
+    </div>
+</div>

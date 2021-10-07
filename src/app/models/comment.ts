@@ -1,4 +1,4 @@
-import { User } from './../../../../../../../target/classes/hierophant-site/src/app/models/user';
+import { User } from './user'
 import { Post } from './post';
 export class Comment {
 
@@ -10,14 +10,14 @@ export class Comment {
 
     constructor(
         comId: number,
-        userId: User,
-        postId: Post,
+        user: User,
+        post: Post,
         commText: string,
         upvotes: number
     ) {
         this.comId = comId
-        this.userId = userId
-        this.postId = postId
+        this.userId = user
+        this.postId = post
         this.commText = commText
         this.upvotes = upvotes
     }

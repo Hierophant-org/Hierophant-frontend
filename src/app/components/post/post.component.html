@@ -1,1 +1,27 @@
-<p>post works!</p>
+
+<div>
+    <div>
+        <h2 class="card-header text-center">{{ title }}</h2>
+    </div>
+
+    <div class="card-body">
+        <h5><a class="nav-link" routerLink="/create">Create Post</a></h5>
+        <!-- I want to iterate through all the User elements within the users property of this compoennt and render them -->
+        <ul *ngFor="let p of posts" class="list-group">
+
+            <li class="list-group-item">Id: {{ p.postId }}</li>
+            <li class="list-group-item">First Name: {{ p.title }}</li>
+        </ul>
+
+    </div>
+    <div *ngIf="posts.length == 0" style="text-align: center;">
+        <!-- This element will only be present on the DOM IF there are no users in the array-->
+        <h5>{{ clientMessage.message }}</h5>
+    </div>
+    <div>
+        <button class="btn btn-secondary btn-center" (click)="findAllPosts()">Fetch Posts</button>
+    </div>
+
+
+
+</div>

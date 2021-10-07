@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class RegisterComponent implements OnInit {
   title = "Register User"
-  public user = new User(0,'','','',[]);
+  public user = new User(0,'','','',[],[]);
   public clientMessage = new ClientMessage('');
   public toast = new ToastComponent(new ToastService);
   constructor(private userService: UserService,public toastService: ToastService) { }

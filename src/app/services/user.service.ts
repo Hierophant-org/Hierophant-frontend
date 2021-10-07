@@ -26,14 +26,19 @@ export class UserService { // this service is only responsible for one thing: ma
 
   // POST
   public registerUser(user: User): Observable<User> {
-    return this.http.post<User>(`${url}/users/register`, user, this.httpOptions) // url, user, this.httpOptions
+    return this.http.post<User>(`${url}/register`, user, this.httpOptions) // url, user, this.httpOptions
       .pipe( // we are calling a method on the data returned in the observable
         catchError(this.handleError) // passing a callback
       )
   }
 
   // GET
-
+  public loginUser(user: User): Observable<User> {
+    return this.http.post<User>(`${url}/login`, user, this.httpOptions) // url, user, this.httpOptions
+      .pipe( // we are calling a method on the data returned in the observable
+        catchError(this.handleError) // passing a callback
+      )
+  }
   // DELETE
 
   // create a method called handleError which will be invoked if something goes wrong in our http requests

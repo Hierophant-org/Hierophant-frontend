@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div>
+    <div>
+        <h2 class="card-header text-center">{{ title }}</h2>
+    </div>
+
+    <div class="card-body text-center">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputUsername">Username</label>
+                    <input [(ngModel)]="user.username" type="text" name="username" class="form-control"
+                        id="inputUsername">
+
+                    <label for="inputPassword4">Password</label>
+                    <input [(ngModel)]="user.password" type="password" name="password" class="form-control"
+                        id="inputPassword4">
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="loginUser()">Login</button>
+        </form>
+    </div>
+</div>
