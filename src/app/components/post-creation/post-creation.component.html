@@ -21,5 +21,11 @@
             </div>
             <button type="submit" class="btn btn-primary" (click)="createPost()">Share</button>
         </form>
+        <div class="overflow-auto ">
+            <div class="scrollmenu">
+                <button  *ngFor="let t of templates" class="template-image" (click)="setImageHtml(t)">
+                    <img src={{t}} alt="great meme template" height="150">
+                </button>
+            </div>
+        </div>
     </div>
-</div>

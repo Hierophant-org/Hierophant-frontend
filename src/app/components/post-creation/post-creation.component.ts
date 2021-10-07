@@ -11,6 +11,8 @@ import { Image } from 'src/app/models/image';
 })
 export class PostCreationComponent implements OnInit {
   title= "Create Post"
+  selectedImage:String="";
+  templates:string[]=["https://imgflip.com/s/meme/Drake-Hotline-Bling.jpg","https://imgflip.com/s/meme/Distracted-Boyfriend.jpg"]
   user:User = new User(0,'','','',[],[]);
   image:Image = new Image(0,"","","")
   post:Post = new Post(0,"",this.user,this.image,0,[])
@@ -21,5 +23,9 @@ export class PostCreationComponent implements OnInit {
   createPost(){
 
     this.postService.createPost(this.post);
+  }
+  setImageHtml(selectedHtml:string){
+    this.image.imgHtml=selectedHtml;
+    console.log(this.image.imgHtml);
   }
 }
