@@ -34,7 +34,8 @@ export class UserService { // this service is only responsible for one thing: ma
 
   // GET
   public loginUser(user: User): Observable<User> {
-    return this.http.post<User>(`${url}/login`, user, this.httpOptions) // url, user, this.httpOptions
+    //http://localhost:5000/hierophant/users/findBy?username=
+    return this.http.get<User>(`${url}/findBy?username=${user.username}`, this.httpOptions) // url, user, this.httpOptions
       .pipe( // we are calling a method on the data returned in the observable
         catchError(this.handleError) // passing a callback
       )

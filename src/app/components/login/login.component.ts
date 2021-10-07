@@ -17,11 +17,19 @@ export class LoginComponent implements OnInit {
 
   public loginUser(): void {
     // call this.userService.registerUser() method and post it
+    let opass="";
     this.userService.loginUser(this.user)
       .subscribe( // subscribe to the data returned and do something like generate client message
-        data => this.clientMessage.message = `Successfully login: ${data.username}`,   // console.log(`successfully added ${data.firstName}`)
+        data => opass=data.password,//, //this.clientMessage.message = `Successfully login: ${data.username}`,
+         // 
         error => this.clientMessage.message = `Something went wrong. Error: ${error}` // console.error(`We got an error: ${error}` 
       )
+      if(opass!="" && opass==this.user.password){
+        console.log(`Correct!!`);
+      }
+      else{
+        console.log(`Wrong!! ${opass} answer:${this.user.password}`);
+      }
       // TODO: if everything is successful, post an alert to be rendered in the view if we add successfully
   }
 
