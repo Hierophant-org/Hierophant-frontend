@@ -17,6 +17,7 @@ export class PostService {
 
   // POST
   public createPost(post: Post): Observable<Post> {
+    console.log(post);
     return this.http.post<Post>(`${url}/insert`, post, this.httpOptions) // url, user, this.httpOptions
       .pipe( // we are calling a method on the data returned in the observable
         catchError(this.handleError) // passing a callback
@@ -25,6 +26,7 @@ export class PostService {
   // GET
    public findAllPosts(): Observable<Post[]> {  // An Observable  is a stream of values that wil be returned at over
     // send a get request and return a collection of User objects
+    
     return this.http.get<Post[]>(url) // by default a fetch request is asynchronous
       .pipe(
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
