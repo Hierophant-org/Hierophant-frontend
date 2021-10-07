@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     let opass="";
     this.userService.loginUser(this.user)
       .subscribe( // subscribe to the data returned and do something like generate client message
-        data => opass=data.password,//, //this.clientMessage.message = `Successfully login: ${data.username}`,
+        data => {opass=data.password,console.log(opass==this.user.password)},//, //this.clientMessage.message = `Successfully login: ${data.username}`,
          // 
         error => this.clientMessage.message = `Something went wrong. Error: ${error}` // console.error(`We got an error: ${error}` 
       )
