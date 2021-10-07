@@ -25,6 +25,7 @@ export class PostCreationComponent implements OnInit {
     this.postService.createPost(this.post);
   }
   setImageHtml(selectedHtml:string){
+    // populate all fields
     this.image.imgHtml=selectedHtml;
     console.log(this.image.imgHtml);
   }
