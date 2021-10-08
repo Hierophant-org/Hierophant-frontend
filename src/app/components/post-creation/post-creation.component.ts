@@ -21,7 +21,7 @@ export class PostCreationComponent implements OnInit {
   ngOnInit(): void {
   }
   createPost(){
-    console.log(this.postService.createPost(this.post));
+    this.postService.createPost(this.post)
   }
   setImageHtml(selectedHtml:string){
     // populate all fields
