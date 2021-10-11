@@ -1,6 +1,6 @@
 import { localUrl, awsUrl } from './../../environments/environment';
 import { User } from './../models/user';
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 // we must import HttpClientModule in the app.module.ts
 import { Observable, throwError } from "rxjs";
@@ -11,9 +11,15 @@ const url = `${awsUrl}/users`;
 
 // we will inject this service into the components that call its methods
 // within their methods
-@Injectable({ // Services in Angular are singlton object 
+
+// @Injectable({ // Services in Angular are singlton object 
+//   providedIn: 'root'
+// })
+
+@Injectable({
   providedIn: 'root'
 })
+
 export class UserService { // this service is only responsible for one thing: making HTTP requests to a server
 
   // we need to inject this service with HttpClient
