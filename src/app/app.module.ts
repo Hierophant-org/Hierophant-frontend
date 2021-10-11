@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './components/toast/toast.component';
 import { PostCreationComponent } from './components/post-creation/post-creation.component';
+import { FreeDraggingDirective } from './free-dragging.directive';
+import { GeneratorComponent } from './components/generator/generator.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { PostCreationComponent } from './components/post-creation/post-creation.
     PostComponent,
     MainComponent,
     ToastComponent,
-    PostCreationComponent
+    PostCreationComponent,
+    FreeDraggingDirective,
+    GeneratorComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,7 @@ import { PostCreationComponent } from './components/post-creation/post-creation.
     FormsModule,
     HttpClientModule
   ],
+  exports: [FreeDraggingDirective],
   providers: [],
   bootstrap: [AppComponent]
 })

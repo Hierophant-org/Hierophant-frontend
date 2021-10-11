@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { MainComponent } from './components/main/main.component';
 import { PostComponent } from './components/post/post.component';
+import { GeneratorComponent } from './components/generator/generator.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'create', component: PostCreationComponent},
+  {path: 'generator', component: GeneratorComponent},
   {path: '**', component: MainComponent}
 
 ];
