@@ -6,7 +6,7 @@ export class Post {
     userId: User;
     image: Image;
     upvotes: number;
-    comments: any[];
+    comments: Comment[];
 
     constructor(
         postId: number,
@@ -14,7 +14,7 @@ export class Post {
         userId: User,
         image: Image,
         upvotes: number,
-        comments: any[]
+        comments: Comment[]
     ) {
         this.postId = postId
         this.title = title
