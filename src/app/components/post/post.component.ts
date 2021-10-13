@@ -18,17 +18,17 @@ export class PostComponent implements OnInit {
   public clientMessage = new ClientMessage('No Posts to show ):');
 
   constructor(private postServ: PostService) {
-   
   }
   
   ngOnInit(): void {
-    this.findAllPosts()
     this.setUsers();
+    this.findAllPosts();
   }
   
   public findAllPosts() {
     this.postServ.findAllPosts() // every object that is captured from the observabel is set as our users array
       .subscribe(data => { this.posts = data }) // this defines what we do with the data returned from the observable
+
     this.postServ.findAllPostUsers() // every object that is captured from the observabel is set as our users array
       .subscribe(data => { this.users = data }) // this defines what we do with the data returned from the observable
     

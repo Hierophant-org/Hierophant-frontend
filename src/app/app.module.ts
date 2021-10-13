@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './components/toast/toast.component';
 import { PostCreationComponent } from './components/post-creation/post-creation.component';
+import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PostCreationComponent } from './components/post-creation/post-creation.
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  // 
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
