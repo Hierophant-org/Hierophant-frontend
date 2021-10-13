@@ -1,4 +1,4 @@
-import { localUrl, awsUrl } from './../../environments/environment';
+import { backendUrl } from './../../environments/environment';
 import { User } from './../models/user';
 import { Injectable, Type } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
@@ -7,7 +7,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 
 
-const url = `${awsUrl}/users`;
+const url = `${backendUrl}/users`;
 
 // we will inject this service into the components that call its methods
 // within their methods
@@ -51,7 +51,9 @@ export class UserService { // this service is only responsible for one thing: ma
   public loginUser(user: User): Observable<User> {
     //http://localhost:5000/hierophant/users/findBy?username=
     //const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:4200', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'POST', 'Access-Control-Allow-Headers': 'Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization' }).set("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIFRva2VuIFBvcnRhbCIsInN1YiI6InRoaW5oIiwiaXNzIjoiQ3JlYXRlZCBieSBoaWVyb3BoYW50IiwiZXhwIjoxNjM0MDE1OTczLCJpYXQiOjE2MzM5ODcxNzN9.BbPyHNHRQVRepskfADugJlZU3cTY83rfZAsH4dbP7TBiEGTRL9vTqXQHzMx2A9WY2lUXCO0PGyYDB1w-KKWtcw"); 
+
     return this.http.post<User>(`${url}/authenticate`, user, { responseType: 'text' as 'json', headers: { skip: "true" } })  // url, user, this.httpOptions
+
       .pipe( // we are calling a method on the data returned in the observable
         tap((response: any) => {
           localStorage.setItem(this.TOKEN_NAME, response);
