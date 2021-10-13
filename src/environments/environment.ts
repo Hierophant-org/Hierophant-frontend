@@ -6,6 +6,7 @@ export const environment = {
   production: false
 };
 export const localUrl = `http://localhost:5000/hierophant`;
+export const awsUrl = `http://hierophantbackendpipe-env.eba-v2pxdpwf.us-east-1.elasticbeanstalk.com/hierophant`;
 
 /*
  * For easier debugging in development mode, you can import the following file

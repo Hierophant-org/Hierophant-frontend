@@ -20,20 +20,21 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.user)
       .subscribe( // subscribe to the data returned and do something like generate client message
         data => {
-          if (data.password != "" && data.password == this.user.password) {
-            console.log(`Correct!!`);
-            // assign a JWT token
-            // redirect to either home page.
-            //==================================
-            // send correct stuff as json to backend 
-            // backend will check those values against db
-            // then send back a token to front end
-          }
-          else {
-            console.log(`Wrong!! ${data.password} answer:${this.user.password}`);
-            // pop up
-            // refresh the page 
-          }
+          // if (data.password != "" && data.password == this.user.password) {
+          //   console.log(`Correct!!`);
+          //   // assign a JWT token
+          //   // redirect to either home page.
+          //   //==================================
+          //   // send correct stuff as json to backend 
+          //   // backend will check those values against db
+          //   // then send back a token to front end
+          // }
+          // else {
+          //   console.log(`Wrong!! ${data.password} answer:${this.user.password}`);
+          //   // pop up
+          //   // refresh the page 
+          // }
+          console.log(`Token ${data}`);
         },
         error => this.clientMessage.message = `Something went wrong. Error: ${error}` // console.error(`We got an error: ${error}` 
       )
