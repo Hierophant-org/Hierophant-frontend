@@ -42,7 +42,7 @@ export class UserService { // this service is only responsible for one thing: ma
 
   // POST
   public registerUser(user: User): Observable<User> {
-    return this.http.post<User>(`${url}/register`, user, this.httpOptions) // url, user, this.httpOptions
+    return this.http.post<User>(`${url}/register`, user, { headers: { skip: "true" } }) // url, user, this.httpOptions
       .pipe( // we are calling a method on the data returned in the observable
         catchError(this.handleError) // passing a callback
       )
@@ -51,7 +51,9 @@ export class UserService { // this service is only responsible for one thing: ma
   public loginUser(user: User): Observable<User> {
     //http://localhost:5000/hierophant/users/findBy?username=
     //const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:4200', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Methods': 'POST', 'Access-Control-Allow-Headers': 'Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization' }).set("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIFRva2VuIFBvcnRhbCIsInN1YiI6InRoaW5oIiwiaXNzIjoiQ3JlYXRlZCBieSBoaWVyb3BoYW50IiwiZXhwIjoxNjM0MDE1OTczLCJpYXQiOjE2MzM5ODcxNzN9.BbPyHNHRQVRepskfADugJlZU3cTY83rfZAsH4dbP7TBiEGTRL9vTqXQHzMx2A9WY2lUXCO0PGyYDB1w-KKWtcw"); 
-    return this.http.post<User>(`${url}/authenticate`, user, { responseType: 'text' as 'json' })  // url, user, this.httpOptions
+
+    return this.http.post<User>(`${url}/authenticate`, user, { responseType: 'text' as 'json', headers: { skip: "true" } })  // url, user, this.httpOptions
+
       .pipe( // we are calling a method on the data returned in the observable
         tap((response: any) => {
           localStorage.setItem(this.TOKEN_NAME, response);
