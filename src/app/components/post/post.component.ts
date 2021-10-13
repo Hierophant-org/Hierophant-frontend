@@ -17,13 +17,11 @@ export class PostComponent implements OnInit {
 
   public clientMessage = new ClientMessage('No Posts to show ):');
 
-  constructor(private postServ: PostService) {
-   
-  }
+  constructor(private postServ: PostService) {}
   
   ngOnInit(): void {
-    this.findAllPosts()
     this.setUsers();
+    this.findAllPosts();
   }
   
   public findAllPosts() {
