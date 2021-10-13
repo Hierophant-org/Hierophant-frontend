@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { localUrl } from 'src/environments/environment';
+import { localUrl, awsUrl } from 'src/environments/environment';
 import { User } from '../models/user';
 
-const url = `${localUrl}/posts`;
+const url = `${awsUrl}/posts`;
 @Injectable({
   providedIn: 'root'
 })
