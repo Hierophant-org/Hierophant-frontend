@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Post } from 'src/app/models/post';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -7,11 +8,13 @@ import { localUrl, awsUrl } from 'src/environments/environment';
 import { User } from '../models/user';
 
 const url = `${awsUrl}/posts`;
+
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  constructor(private http: HttpClient) { }
+  token: string = "";
+  constructor(private http: HttpClient, private userService: UserService) { }
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
@@ -19,7 +22,10 @@ export class PostService {
   // POST
   public createPost(post: Post): Observable<Post> {
     console.log(post);
-    const headers = new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIFRva2VuIFBvcnRhbCIsInN1YiI6InRoaW5oIiwiaXNzIjoiQ3JlYXRlZCBieSBoaWVyb3BoYW50IiwiZXhwIjoxNjM0MTI2MTA0LCJpYXQiOjE2MzQwOTczMDR9.4l6AyQ0hyGHZH2NkLiTNtCTX3rfILsE5Z_JyhTcWs9jGyzDYMFko0X7xZhzFtzWzr-bBl41e2MBt9fFfxTQueQ');
+    // const headers = new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIFRva2VuIFBvcnRhbCIsInN1YiI6InRoaW5oIiwiaXNzIjoiQ3JlYXRlZCBieSBoaWVyb3BoYW50IiwiZXhwIjoxNjM0MTI2MTA0LCJpYXQiOjE2MzQwOTczMDR9.4l6AyQ0hyGHZH2NkLiTNtCTX3rfILsE5Z_JyhTcWs9jGyzDYMFko0X7xZhzFtzWzr-bBl41e2MBt9fFfxTQueQ');
+    // , { headers }
+    this.token = this.userService.getToken();
+    const headers = new HttpHeaders().set('Authorization', this.token);
     return this.http.post<Post>(`${url}/insert`, post, { headers }) // url, user, this.httpOptions
       .pipe( // we are calling a method on the data returned in the observable
         catchError(this.handleError) // passing a callback
