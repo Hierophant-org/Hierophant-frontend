@@ -1,4 +1,4 @@
-import { localUrl, awsUrl } from './../../environments/environment';
+import { backendUrl } from './../../environments/environment';
 import { User } from './../models/user';
 import { Injectable, Type } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
@@ -7,7 +7,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 
 
-const url = `${awsUrl}/users`;
+const url = `${backendUrl}/users`;
 
 // we will inject this service into the components that call its methods
 // within their methods
