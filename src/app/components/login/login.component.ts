@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
           //   // pop up
           //   // refresh the page 
           // }
-          console.log(`Token ${data}`);
         },
         error => this.clientMessage.message = `Something went wrong. Error: ${error}` // console.error(`We got an error: ${error}` 
       )
