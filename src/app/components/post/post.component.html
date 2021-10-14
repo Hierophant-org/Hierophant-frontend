@@ -14,15 +14,17 @@
             <li class="list-group-item">Post Id: {{ p.postId }}</li>
             <li class="list-group-item">Post Title: {{ p.title }}</li>
             <li class="list-group-item">Post Image: {{ p.image.imgHtml }}</li>
-
-
-
-
-
-
-
-
-
+            <li class="list-group-item">
+                <!-- <app-comment [parentPost]=p.postId></app-comment> -->
+            <li class="list-group-item">
+                <ul *ngFor="let c of p.comments" class="list-group">
+                    Commment:
+                    <li class="list-group-item">Posted By: {{(c.userId)?.username}}</li>
+                    <li class="list-group-item">"{{ c.commText }}"</li>
+                    <li class="list-group-item">Upvotes: {{ c.upvotes }}</li>
+                </ul>
+            </li>
+        </ul>
             <li class="list-group-item">
                 <p>Upvotes: {{ p.upvotes }}</p>
                 <mat-button-toggle-group #group="matButtonToggleGroup">
@@ -38,10 +40,9 @@
 
 
     </div>
-    <div *ngIf="posts.length == 0" style="text-align: center;">
+    <div *ngIf="posts.length == 0" style="text-align: center">
         <!-- This element will only be present on the DOM IF there are no users in the array-->
         <h5>{{ clientMessage.message }}</h5>
-
     </div>
     <div>
         <button class="btn btn-secondary btn-center" (click)="findAllPosts()">Fetch Posts</button>

@@ -1,3 +1,4 @@
+import { Comment } from 'src/app/models/comment';
 import { User } from './../../models/user';
 import { Post } from 'src/app/models/post';
 import { PostService } from './../../services/post.service';

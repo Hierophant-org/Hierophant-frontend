@@ -11,26 +11,30 @@ import { Comment } from 'src/app/models/comment';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-  @Input() post!:Post
+  @Input() parentPost!:number
   public comments: Comment[] = [];
   public users: User[] = [];
 
   constructor(private comServ:CommentService) { }
 
   ngOnInit(): void {
-
+    this.findAllComment();
   }
+    // public findWhoCommented(comment:Comment) {
+  //   this.comServ.findWhoCommented(this.parentPost,comment.comId).subscribe(data => {
+  //     this.users = data;
+  //   })
+  // }
   public findAllComment() {
     const observable = forkJoin({
-      p: this.comServ.findAllComments(),
-      u: this.comServ.findAllCommentUsers(this.post.postId)
+      p: this.comServ.findAllComments(this.parentPost),
     }).subscribe(data => {
-      this.comments = data.p;
-      this.users = data.u;
-      for (let index = 0; index < this.comments.length; index++) {
-        this.comments[index].userId = this.users[index];
-        console.log(this.comments[index]);
-      }
+      this.comments.concat(data.p);
+      console.log(data);
+      // for (let index = 0; index < this.comments.length; index++) {
+      //   this.comments[index].userId = this.users[index];
+      //   console.log(this.comments[index]);
+      // }
 
     })
   }

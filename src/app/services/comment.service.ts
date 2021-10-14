@@ -7,7 +7,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { Comment } from '../models/comment';
 
-const url = `${backendUrl}/posts`;
+const url = `${backendUrl}/comments`;
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,13 @@ export class CommentService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-
-  public createPost(comment: Comment): Observable<Comment> {
+  findWhoCommented(postId: number, comId: number) {
+    return this.http.get<Comment[]>(`${url}/findUser`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
+    .pipe(
+      catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
+    )
+  }
+  public createComment(comment: Comment): Observable<Comment> {
     console.log(comment);
     // const headers = new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIFRva2VuIFBvcnRhbCIsInN1YiI6InRoaW5oIiwiaXNzIjoiQ3JlYXRlZCBieSBoaWVyb3BoYW50IiwiZXhwIjoxNjM0MTI2MTA0LCJpYXQiOjE2MzQwOTczMDR9.4l6AyQ0hyGHZH2NkLiTNtCTX3rfILsE5Z_JyhTcWs9jGyzDYMFko0X7xZhzFtzWzr-bBl41e2MBt9fFfxTQueQ');
     // , { headers }
@@ -35,10 +40,10 @@ export class CommentService {
       )
   }
   // GET
-  public findAllComments(): Observable<Comment[]> {  // An Observable  is a stream of values that wil be returned at over
+  public findAllComments(postId:number): Observable<Comment[]> {  // An Observable  is a stream of values that wil be returned at over
     // send a get request and return a collection of User objects
 
-    return this.http.get<Comment[]>(`${url}/findAll`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
+    return this.http.get<Comment[]>(`${url}/findByPostId?id=${postId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
       .pipe(
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
