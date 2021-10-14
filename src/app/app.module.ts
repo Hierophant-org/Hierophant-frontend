@@ -14,6 +14,7 @@ import { PostCreationComponent } from './components/post-creation/post-creation.
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CommentComponent } from './components/comment/comment.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
     NavComponent,
     PostComponent,
     MainComponent,
-    PostCreationComponent
+    PostCreationComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
