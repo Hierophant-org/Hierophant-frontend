@@ -3,7 +3,7 @@ import { Post } from 'src/app/models/post';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { backendUrl } from 'src/environments/environment';
 import { User } from '../models/user';
 
@@ -14,7 +14,12 @@ const url = `${backendUrl}/posts`;
 })
 export class PostService {
   token: string = "";
+  username: string = "";
+  postObj: any;
+  obj: any;
   constructor(private http: HttpClient, private userService: UserService) { }
+
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
@@ -48,7 +53,9 @@ export class PostService {
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
   }
+
   // DELETE
+
 
   // create a method called handleError which will be invoked if something goes wrong in our http requests
   private handleError(httpError: HttpErrorResponse) {

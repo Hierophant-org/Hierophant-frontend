@@ -15,6 +15,7 @@ import { PostCreationComponent } from './components/post-creation/post-creation.
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 import { CommentComponent } from './components/comment/comment.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { CommentComponent } from './components/comment/comment.component';
   ],
   // 
   providers: [AuthInterceptorProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: []
 })
 export class AppModule { }
