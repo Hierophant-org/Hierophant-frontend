@@ -19,7 +19,6 @@ export class PostCreationComponent implements OnInit {
   templates: string[] = ["https://imgflip.com/s/meme/Drake-Hotline-Bling.jpg", "https://imgflip.com/s/meme/Distracted-Boyfriend.jpg"];
   nameFromToken: any = this.postCreation.getDecodedAccessToken();
   user: User = new User(0, this.nameFromToken.sub, '', '', [], []);
-
   image: Image = new Image(0, "", "", "")
   post: Post = new Post(0, "", this.user, this.image, 0, [])
   constructor(private postService: PostService, private postCreation: PostCreationService, private userService: UserService) { }
@@ -30,13 +29,12 @@ export class PostCreationComponent implements OnInit {
   public createPost(): void {
     this.postService.createPost(this.post)
       .subscribe(
-        data => { console.log(`data from backend ${data}`); }
+        data => { }
       )
   }
   setImageHtml(selectedHtml: string) {
     // populate all fields
     this.image.imgHtml = selectedHtml;
-    console.log(this.image.imgHtml);
   }
 
   public testing(): any {

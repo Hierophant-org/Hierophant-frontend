@@ -14,6 +14,8 @@ import { PostCreationComponent } from './components/post-creation/post-creation.
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { ToastrModule } from 'ngx-toastr';
       progressAnimation: 'decreasing',
       preventDuplicates: true
     }),
+    MatButtonToggleModule,
+    MatIconModule,
   ],
   // 
   providers: [AuthInterceptorProvider],

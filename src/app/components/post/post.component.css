@@ -1,3 +1,38 @@
 .nav-link {
     text-align: center;
 }
+
+mat-button-toggle-group {
+    box-shadow: none;
+    height: 30px;
+    align-items: center;
+}
+
+mat-button-toggle-group:hover {
+    border: 1px #000 solid;
+    border-radius: 5px;
+}
+
+mat-button-toggle {
+    border: 1px rgba(0, 0, 0, 0) solid;
+    margin-top: 5px;
+    padding-right: 1px;
+}
+
+.mat-button-toggle-checked {
+    background-color: green;
+}
+
+::ng-deep .mat-button-toggle-checked button {
+    color: black;
+    border: 1px rgba(0, 0, 0, 0) solid;
+}
+
+.upvote {
+    color: green;
+}
+
+.upvote:hover {
+    background-color: green;
+    color: #fff;
+}

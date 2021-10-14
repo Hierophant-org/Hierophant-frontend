@@ -14,7 +14,28 @@
             <li class="list-group-item">Post Id: {{ p.postId }}</li>
             <li class="list-group-item">Post Title: {{ p.title }}</li>
             <li class="list-group-item">Post Image: {{ p.image.imgHtml }}</li>
+
+
+
+
+
+
+
+
+            <li class="list-group-item">
+                <p>Upvotes: {{ p.upvotes }}</p>
+                <mat-button-toggle-group #group="matButtonToggleGroup">
+                    <mat-button-toggle class="upvote" value={{p.upvotes}} id={{p.postId}}
+                        (change)="onChange($event, group, p)">
+                        <mat-icon>arrow_drop_up</mat-icon>
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </li>
+
+
+
         </ul>
+
 
 
     </div>
