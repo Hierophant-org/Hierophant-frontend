@@ -1,3 +1,4 @@
+import { Comment } from 'src/app/models/comment';
 import { User } from './../../models/user';
 import { Post } from 'src/app/models/post';
 import { PostService } from './../../services/post.service';
@@ -17,7 +18,8 @@ export class PostComponent implements OnInit {
   title = "All Posts"
   public posts: Post[] = [];
   public users: User[] = [];
-
+  public comments: Comment[] = [];
+  
   public clientMessage = new ClientMessage('No Posts to show ):');
   constructor(private postServ: PostService) { }
   ngOnInit(): void {

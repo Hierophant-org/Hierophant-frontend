@@ -1,3 +1,4 @@
+import { Comment } from 'src/app/models/comment';
 import { Image } from './image';
 import { User } from './user';
 export class Post {
