@@ -14,6 +14,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { PostCreationComponent } from './components/post-creation/post-creation.component';
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
   ],
   // 
   providers: [AuthInterceptorProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: []
 })
 export class AppModule { }

@@ -3,6 +3,10 @@ import { PostService } from './../../services/post.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Image } from 'src/app/models/image';
+import { PostCreationService } from 'src/app/services/post-creation.service';
+import { UserService } from 'src/app/services/user.service';
+import { pipe } from 'rxjs';
+
 
 @Component({
   selector: 'app-post-creation',
@@ -10,15 +14,18 @@ import { Image } from 'src/app/models/image';
   styleUrls: ['./post-creation.component.css']
 })
 export class PostCreationComponent implements OnInit {
-  title = "Create Post"
+  title = "Create Post";
   selectedImage: String = "";
-  templates: string[] = ["https://imgflip.com/s/meme/Drake-Hotline-Bling.jpg", "https://imgflip.com/s/meme/Distracted-Boyfriend.jpg"]
-  user: User = new User(1, 'joel', 'joel', 'joel@gmail.com', [], []);
+  templates: string[] = ["https://imgflip.com/s/meme/Drake-Hotline-Bling.jpg", "https://imgflip.com/s/meme/Distracted-Boyfriend.jpg"];
+  nameFromToken: any = this.postCreation.getDecodedAccessToken();
+  user: User = new User(0, this.nameFromToken.sub, '', '', [], []);
+
   image: Image = new Image(0, "", "", "")
   post: Post = new Post(0, "", this.user, this.image, 0, [])
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private postCreation: PostCreationService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.testing();
   }
   public createPost(): void {
     this.postService.createPost(this.post)
@@ -31,4 +38,13 @@ export class PostCreationComponent implements OnInit {
     this.image.imgHtml = selectedHtml;
     console.log(this.image.imgHtml);
   }
+
+  public testing(): any {
+    return this.userService.getUserInfo(this.nameFromToken.sub).subscribe(data => {
+      this.user.userId = data.userId;
+    })
+  }
+
+
+
 }
