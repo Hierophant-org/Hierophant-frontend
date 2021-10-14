@@ -67,6 +67,13 @@ export class UserService { // this service is only responsible for one thing: ma
     return (`Bearer ${localStorage.getItem(this.TOKEN_NAME)}`);
   }
 
+  public getUserInfo(username: string): Observable<User> {
+    return this.http.get<User>(`${url}/findBy?username=${username}`)
+      .pipe(
+        catchError(this.handleError) // passing a callback
+      );
+  }
+
   // this method cannot use Observable<User> for some reason
   public welcomeUser(token: string) {
     let tokenStr = `Bearer ${token}`;
