@@ -14,11 +14,12 @@
             <li class="list-group-item">Post Id: {{ p.postId }}</li>
             <li class="list-group-item">Post Title: {{ p.title }}</li>
             <li class="list-group-item">Post Image: {{ p.image.imgHtml }}</li>
+            <li class="list-group-item">Post Comments: <app-comment></app-comment></li>
         </ul>
 
 
     </div>
-    <div *ngIf="posts.length == 0" style="text-align: center;">-->
+    <div *ngIf="posts.length == 0" style="text-align: center;">
         <!-- This element will only be present on the DOM IF there are no users in the array-->
         <h5>{{ clientMessage.message }}</h5>
 
