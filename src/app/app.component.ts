@@ -1,6 +1,5 @@
-import { ClientMessage } from './models/client-message';
-import { Component, TemplateRef } from '@angular/core';
-import { ToastService } from './services/toast.service';
+import { Component } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,5 +7,5 @@ import { ToastService } from './services/toast.service';
 })
 export class AppComponent {
   title = 'hierophant-site';
- 
+
 }
