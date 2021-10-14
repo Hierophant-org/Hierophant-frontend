@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './components/toast/toast.component';
 import { PostCreationComponent } from './components/post-creation/post-creation.component';
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
     PostComponent,
     MainComponent,
     ToastComponent,
-    PostCreationComponent
+    PostCreationComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
