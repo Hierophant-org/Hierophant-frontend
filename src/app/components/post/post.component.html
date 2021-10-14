@@ -24,7 +24,6 @@
                     <li class="list-group-item">Upvotes: {{ c.upvotes }}</li>
                 </ul>
             </li>
-        </ul>
             <li class="list-group-item">
                 <p>Upvotes: {{ p.upvotes }}</p>
                 <mat-button-toggle-group #group="matButtonToggleGroup">
@@ -34,10 +33,7 @@
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </li>
-
         </ul>
-
-
 
     </div>
     <div *ngIf="posts.length == 0" style="text-align: center">
