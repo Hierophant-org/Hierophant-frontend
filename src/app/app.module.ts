@@ -10,9 +10,10 @@ import { MainComponent } from './components/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastComponent } from './components/toast/toast.component';
 import { PostCreationComponent } from './components/post-creation/post-creation.component';
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -23,7 +24,6 @@ import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
     NavComponent,
     PostComponent,
     MainComponent,
-    ToastComponent,
     PostCreationComponent
   ],
   imports: [
@@ -31,7 +31,14 @@ import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      progressBar: true,
+      progressAnimation: 'decreasing',
+      preventDuplicates: true
+    }),
   ],
   // 
   providers: [AuthInterceptorProvider],
