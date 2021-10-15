@@ -5,14 +5,20 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { MainComponent } from './components/main/main.component';
 import { PostComponent } from './components/post/post.component';
+import { GeneratorComponent } from './components/generator/generator.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'main', component: MainComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'create', component: PostCreationComponent },
-  { path: '**', component: MainComponent }
+  {path: '', component: MainComponent},
+  {path: 'main', component: MainComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'create', component: PostCreationComponent},
+<<<<<<< HEAD
+  {path: 'generator', component: GeneratorComponent},
+=======
+  {path: 'g', component: GeneratorComponent},
+>>>>>>> main
+  {path: '**', component: MainComponent}
 
 ];
 
