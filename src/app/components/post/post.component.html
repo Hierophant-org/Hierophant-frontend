@@ -1,56 +1,63 @@
-<div>
-    <div>
-        <h2 class="card-header text-center">{{ title }}</h2>
-    </div>
-
-    <!-- <div class="card-body"> -->
-    <h5><a class="nav-link" routerLink="/create">Create Post</a></h5>
-    <!-- I want to iterate through all the User elements within the users property of this compoennt and render them -->
-    <!-- <div>
-            <button class="btn btn-secondary btn-center" (click)="setUsers()">Show Users</button>
-        </div> -->
+<div class="cards">
     <ul *ngFor="let p of posts" class="list-group">
         <mat-card class="example-card">
             <mat-card-header>
-                <mat-card-title>Posted By: {{(p.userId)?.username}}</mat-card-title>
-                <mat-card-subtitle>Post Id: {{ p.postId }}</mat-card-subtitle>
+                <mat-card-title>{{ p.title }}</mat-card-title>
+                <mat-card-subtitle>Posted by h/{{(p.userId)?.username}}</mat-card-subtitle>
             </mat-card-header>
-            <div class="container h-100 d-flex">
-                <div class="card border-0 my-auto w-100">
-                    <img mat-card-image src="{{ p.image.imgHtml }}" alt="Data Asset">
-                </div>
+            <br>
+            <div class="container h-100 d-flex imageContainer">
+                <!-- <div class="card border-0 my-auto w-50"> -->
+                <img mat-card-image src="{{ p.image.imgHtml }}" alt="Data Asset">
+                <!-- </div> -->
             </div>
             <mat-card-content>
-                <ul *ngFor="let c of p.comments" class="list-group">
-                    Commment:
-                    <li class="list-group-item">Posted By: {{(c.userId)?.username}}</li>
-                    <li class="list-group-item">"{{ c.commText }}"</li>
-                </ul>
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Comments
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{panelOpenState ? '' : 'Click to see all comments'}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <ul *ngFor="let c of p.comments" class="list-group">
+                            <li class="list-group-item commentItems">h/{{(c.userId)?.username}} <br>
+                                <span class="userComment">
+                                    "{{c.commText }}"
+                                </span>
+                            </li>
+                        </ul>
+                        <br>
+                        <app-comment [parentPost]=p class="commentComponent"></app-comment>
+                    </mat-expansion-panel>
+                </mat-accordion>
             </mat-card-content>
             <mat-card-actions>
                 <mat-button-toggle-group #group="matButtonToggleGroup">
                     <mat-button-toggle class="upvote" value={{p.upvotes}} id={{p.postId}}
                         (change)="onChange($event, group, p)">
-                        <div *ngIf="p.upvotes > 100" class="upvotesAndIcon">
+                        <div *ngIf="p.upvotes >= 100;else other_content" class="upvotesAndIcon">
                             <span class="upvotesNumber">Upvotes: {{ p.upvotes }}</span>
                             <span class="material-icons">
                                 egg_alt
                             </span>
                         </div>
-                        <div *ngIf="p.upvotes < 100" class="upvotesAndIcon">
-                            <span class="upvotesNumber">Upvotes: {{ p.upvotes }}</span>
-                            <span class="material-icons">
-                                egg
-                            </span>
-                        </div>
+                        <ng-template #other_content>
+                            <div class="upvotesAndIcon">
+                                <span class="upvotesNumber">Upvotes: {{ p.upvotes }}</span>
+                                <span class="material-icons">
+                                    egg
+                                </span>
+                            </div>
+                        </ng-template>
                     </mat-button-toggle>
                 </mat-button-toggle-group>
-                <app-comment [parentPost]=p class="commentComponent"></app-comment>
             </mat-card-actions>
         </mat-card>
         <hr>
     </ul>
-
     <!-- </div> -->
     <div *ngIf="posts.length == 0" style="text-align: center">
         <!-- This element will only be present on the DOM IF there are no users in the array-->

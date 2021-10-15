@@ -22,6 +22,10 @@ import { CommentComponent } from './components/comment/comment.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+
+
 
 
 @NgModule({
@@ -44,7 +48,7 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
+
     ToastrModule.forRoot({
       timeOut: 5000,
       progressBar: true,
@@ -55,7 +59,9 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule,
+    MatTabsModule
   ],
   providers: [AuthInterceptorProvider],
   exports: [FreeDraggingDirective],

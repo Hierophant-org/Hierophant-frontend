@@ -13,8 +13,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-
-  title = "All Posts"
+  panelOpenState = false;
   public posts: Post[] = [];
   public users: User[] = [];
   private _activeValue = "";
@@ -42,8 +41,9 @@ export class PostComponent implements OnInit {
         for (let index = 0; index < pos.comments.length; index++) {
           this.comServ.findWhoCommented(pos.comments[index].comId).subscribe(
             data => pos.comments[index].userId = data
-          )}
+          )
         }
+      }
       )
     })
   }
