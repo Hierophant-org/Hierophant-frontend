@@ -5,7 +5,6 @@ import { User } from 'src/app/models/user';
 import { Image } from 'src/app/models/image';
 import { PostCreationService } from 'src/app/services/post-creation.service';
 import { UserService } from 'src/app/services/user.service';
-import { pipe } from 'rxjs';
 
 
 @Component({

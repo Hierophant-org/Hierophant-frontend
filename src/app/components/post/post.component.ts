@@ -1,14 +1,11 @@
 import { CommentService } from './../../services/comment.service';
-import { Comment } from 'src/app/models/comment';
 import { User } from './../../models/user';
 import { Post } from 'src/app/models/post';
 import { PostService } from './../../services/post.service';
 import { Component, OnInit } from '@angular/core';
 import { ClientMessage } from 'src/app/models/client-message';
-import { forkJoin, Observable, scheduled, Scheduler, zip } from 'rxjs';
-import { concat } from 'rxjs';
-import { concatAll, map, withLatestFrom } from 'rxjs/operators';
-import { Image } from 'src/app/models/image';
+import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-post',

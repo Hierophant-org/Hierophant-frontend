@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { MainComponent } from './components/main/main.component';
-import { PostComponent } from './components/post/post.component';
 import { GeneratorComponent } from './components/generator/generator.component';
 
 const routes: Routes = [
@@ -13,11 +12,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'create', component: PostCreationComponent},
-<<<<<<< HEAD
-  {path: 'generator', component: GeneratorComponent},
-=======
   {path: 'g', component: GeneratorComponent},
->>>>>>> main
   {path: '**', component: MainComponent}
 
 ];
