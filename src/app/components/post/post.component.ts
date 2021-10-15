@@ -1,3 +1,4 @@
+import { CommentService } from './../../services/comment.service';
 import { Comment } from 'src/app/models/comment';
 import { User } from './../../models/user';
 import { Post } from 'src/app/models/post';
@@ -24,7 +25,7 @@ export class PostComponent implements OnInit {
   private id: number = 0;
 
   public clientMessage = new ClientMessage('No Posts to show ):');
-  constructor(private postServ: PostService) { }
+  constructor(private postServ: PostService, private comServ: CommentService) { }
   ngOnInit(): void {
     this.findAllPosts();
   }
@@ -32,17 +33,21 @@ export class PostComponent implements OnInit {
   public findAllPosts() {
     const observable = forkJoin({
       p: this.postServ.findAllPosts(),
-      u: this.postServ.findAllPostUsers()
+      u: this.postServ.findAllPostUsers(),
     }).subscribe(data => {
       this.posts = data.p;
       this.users = data.u;
       for (let index = 0; index < this.posts.length; index++) {
         this.posts[index].userId = this.users[index];
         this.numberOfUpvotes = data.p[index].upvotes;
-
       }
-
-
+      this.posts.forEach(pos => {
+        for (let index = 0; index < pos.comments.length; index++) {
+          this.comServ.findWhoCommented(pos.comments[index].comId).subscribe(
+            data => pos.comments[index].userId = data
+          )}
+        }
+      )
     })
   }
 

@@ -22,8 +22,8 @@ export class CommentService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-  findWhoCommented(postId: number, comId: number) {
-    return this.http.get<Comment[]>(`${url}/findUser`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
+  findWhoCommented(comId: number) {
+    return this.http.get<User>(`${url}/findUser?id=${comId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
       .pipe(
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
