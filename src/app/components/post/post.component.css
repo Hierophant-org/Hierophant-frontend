@@ -20,25 +20,21 @@ mat-button-toggle {
 }
 
 .mat-button-toggle-checked {
-    background-color: green;
+    background-color: white;
 }
 
 ::ng-deep .mat-button-toggle-checked button {
-    color: black;
+    color: #424242;
     border: 1px rgba(0, 0, 0, 0) solid;
 }
 
 .upvote {
-    color: green;
+    color: white;
 }
 
 .upvote:hover {
-    background-color: green;
+    background: linear-gradient(0deg, #2b5876, #4e4376);
     color: #fff;
-}
-
-mat-button-toggle-group {
-    padding: 20px 10px !important;
 }
 
 .upvotesNumber {
@@ -59,4 +55,10 @@ mat-button-toggle-group {
     display: inline-flex;
     flex-direction: row;
     float: right;
+}
+
+.mat-card-actions {
+    display: block !important;
+    margin: auto !important;
+    text-align: center !important;
 }

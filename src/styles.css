@@ -2,24 +2,73 @@
 
 html, body {
     height: 100%;
-    background-color: whitesmoke;
-}
-
-body {
-    padding: 70px;
+    background: linear-gradient(180deg, #614385, #516395);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* slategray > dimgray */
 }
 
 .card {
     padding: 1%;
 }
 
-html, body {
-    height: 100%;
-}
-
 body {
+    padding: 70px;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 50% !important;
+}
+
+.imageContainer {
+    width: 100% !important;
+}
+
+mat-card-title {
+    text-align: center;
+}
+
+mat-card-subtitle {
+    text-align: center;
+}
+
+mat-card-header {
+    width: 100% !important;
+    display: block !important;
+}
+
+.card {
+    background: none;
+}
+
+.mat-card {
+    background: linear-gradient(0deg, #2b5876, #4e4376);
+    color: #fff;
+    border: 1px solid black;
+    box-shadow: 0 1px 5px 10px rgb(0 0 0 / 0.2);
+}
+
+/* 2b5876 4e4376 */
+
+.btn-primary {
+    margin: auto;
+    width: 25%;
+    display: block;
+    /* background-color: something; */
+}
+
+.mat-card:hover {
+    border: 1px solid grey;
+    box-shadow: 0 1px 5px 10px rgb(0 0 0 / 0.2);
+}
+
+.commentItems {
+    background: linear-gradient(0deg, #2b5876, #4e4376);
+    margin-bottom: 5px !important;
+}
+
+.userComment {
+    margin-left: 15px;
+}
