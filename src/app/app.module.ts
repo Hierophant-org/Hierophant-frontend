@@ -14,12 +14,10 @@ import { PostCreationComponent } from './components/post-creation/post-creation.
 import { AuthInterceptorProvider } from './interceptor/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
-
 import { CommentComponent } from './components/comment/comment.component';
-
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -48,6 +46,7 @@ import { CommentComponent } from './components/comment/comment.component';
     }),
     MatButtonToggleModule,
     MatIconModule,
+    MatCardModule,
   ],
   // 
   providers: [AuthInterceptorProvider],
