@@ -36,3 +36,20 @@ mat-button-toggle {
     background-color: green;
     color: #fff;
 }
+
+mat-button-toggle-group {
+    padding: 20px 10px !important;
+}
+
+.upvotesNumber {
+    position: relative;
+    display: inline-flex;
+    padding: 10px 10px;
+    top: -2px;
+}
+
+.material-icons {
+    display: inline-flex;
+    position: relative;
+    top: 4px;
+}
