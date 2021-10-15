@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
+=======
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { localUrl } from 'src/environments/environment';
+import { tap } from 'rxjs/operators';
+>>>>>>> main
 export class MEME
 {
   constructor(public title : String,public url : String)
@@ -10,6 +18,10 @@ export class MEME
   }
 }
 
+<<<<<<< HEAD
+=======
+const backendurl = `${localUrl}/s3`;
+>>>>>>> main
 
 @Component({
   selector: 'app-generator',
@@ -22,15 +34,34 @@ export class GeneratorComponent implements OnInit {
 memes : MEME[] =[];  
 topText = '';
 bottomText = '';
+<<<<<<< HEAD
 topTextColor = '00000';
 bottomTextColor = '00000';
+=======
+topTextColor = 'black';
+bottomTextColor = 'black';
+>>>>>>> main
 topTextSize =  '40px'; 
 bottomTextSize = '40px';
 topTextFont = 'Times New Roman';
 bottomTextFont = "Times New Roman";
+<<<<<<< HEAD
 ImageWidth = 0;
 ImageHeight = 0;
 image = new Image();
+=======
+ttx = 0;
+tty=0;
+btx=0;
+bty=0;
+ImageWidth = 0;
+ImageHeight = 0;
+image = new Image();
+file:any;
+bucket = 's3://hierophant-bucket/';
+secureUrl = '';
+
+>>>>>>> main
 
 fileEvent:any;
 
@@ -63,6 +94,10 @@ console.log(e.type);
   
 
   this.fileEvent = e;
+<<<<<<< HEAD
+=======
+  this.file = e.target.files[0];
+>>>>>>> main
    console.log(e.target.files[0]);
     render.readAsDataURL(e.target.files[0]);
     render.onload = function ()
@@ -87,6 +122,10 @@ console.log(e.type);
  {
   if(e.target)
   {
+<<<<<<< HEAD
+=======
+    this.file = e.target.url;
+>>>>>>> main
   img.src = e.target.src as string;
   console.log(img.height , img.width);
       img = this.resizeImage(img);
@@ -184,6 +223,7 @@ getMemes()
   );
 }
 
+<<<<<<< HEAD
 saveImage(e:any)
 {
   console.log("savingImage...");
@@ -191,7 +231,67 @@ saveImage(e:any)
 }
 
 
+=======
+addTextToCanvas()
+{
+
+  let canvas = this.ImageCanvas.nativeElement as HTMLCanvasElement;
+  let cc = canvas.getBoundingClientRect();
+  let rect1 = document.getElementById("overlay1");
+  let bc1 = rect1!.getBoundingClientRect();
+  let rect2 = document.getElementById("overlay2");
+  let bc2 = rect2!.getBoundingClientRect();
+  this.ttx = bc1.x  - cc.x;
+  this.tty = bc1.y  - cc.y + rect1!.getBoundingClientRect().height / 2;
+  this.btx = bc2.x  - cc.x;
+  this.bty = bc2.y  - cc.y + rect2!.getBoundingClientRect().height / 2;
+  
+  //let canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
+  var ctx = canvas.getContext("2d");
+  ctx!.font = this.topTextSize+" "+this.topTextFont;
+  ctx!.fillStyle = this.topTextColor;
+  ctx!.fillText(this.topText, this.ttx, this.tty);
+  ctx!.font = this.bottomTextSize+" "+this.bottomTextFont;
+  ctx!.fillStyle = this.bottomTextColor;
+  ctx!.fillText(this.bottomText, this.btx, this.bty);
+
+}
+
+updateImage()
+{
+
+
+
+
+  
+  let canvas = this.ImageCanvas.nativeElement as HTMLCanvasElement;
+  //let canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
+  this.addTextToCanvas();
+  var canvasData = canvas.toDataURL("image/png");
+  var fd = new FormData();
+  console.log('data : '+this.file.toString()+' : '+ this.file.name);
+  fd.append('myImage' , canvasData ,this.file.name);
+  this.http.post<any>("http://localhost:5000/hierophant/images/uploadImage" , fd).subscribe
+  (
+   res =>
+   {
+    
+     console.log(res);
+     
+   }
+  );
+
+
+
+  
+  
+>>>>>>> main
 }
 
 
 
+<<<<<<< HEAD
+=======
+
+}
+>>>>>>> main

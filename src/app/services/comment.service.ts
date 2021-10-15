@@ -1,60 +1,58 @@
 import { UserService } from 'src/app/services/user.service';
-import { Post } from 'src/app/models/post';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { backendUrl } from 'src/environments/environment';
 import { User } from '../models/user';
+import { catchError, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { Comment } from '../models/comment';
 
-const url = `${backendUrl}/posts`;
+const url = `${backendUrl}/comments`;
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class CommentService {
   token: string = "";
   username: string = "";
   postObj: any;
   obj: any;
   constructor(private http: HttpClient, private userService: UserService) { }
 
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-
-  // POST
-  public createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${url}/insert`, post) // url, user, this.httpOptions
+  findWhoCommented(comId: number) {
+    return this.http.get<User>(`${url}/findUser?id=${comId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
+      .pipe(
+        catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
+      )
+  }
+  public createComment(comment: Comment): Observable<Comment> {
+    console.log(comment);
+    return this.http.post<Comment>(`${url}/insert`, comment) // url, user, this.httpOptions
       .pipe( // we are calling a method on the data returned in the observable
         catchError(this.handleError) // passing a callback
       )
   }
-
-
   // GET
-  public findAllPosts(): Observable<Post[]> {  // An Observable  is a stream of values that wil be returned at over
+  public findAllComments(postId: number): Observable<Comment[]> {  // An Observable  is a stream of values that wil be returned at over
     // send a get request and return a collection of User objects
 
-    return this.http.get<Post[]>(`${url}/findAll`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
+    return this.http.get<Comment[]>(`${url}/findByPostId?id=${postId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
       .pipe(
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
   }
-  public findAllPostUsers(): Observable<User[]> {  // An Observable  is a stream of values that wil be returned at over
+  public findAllCommentUsers(postId: number): Observable<User[]> {  // An Observable  is a stream of values that wil be returned at over
     // send a get request and return a collection of User objects
 
-    return this.http.get<User[]>(`${url}/findAllUsers`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
+    return this.http.get<User[]>(`${url}/findAllUsers?id=${postId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
       .pipe(
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
   }
 
-  // UPDATE
-  public updateVotes(post: Post) {
-    return this.http.patch(`${url}/update`, post);
-  }
   // DELETE
 
 

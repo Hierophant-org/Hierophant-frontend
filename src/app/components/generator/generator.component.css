@@ -54,6 +54,7 @@
   }
   img:hover
   {
+<<<<<<< HEAD
      filter:grayscale();
      border-width: "2px";
      border-color: black;
@@ -73,3 +74,15 @@
       border-color: red;
       border-style: solid;
   }
+=======
+     
+     border-color: grey;
+     border-style:outset;
+  }
+  img:active
+  {
+      border-color: red;
+      border-style: solid;
+  }
+  
+>>>>>>> main

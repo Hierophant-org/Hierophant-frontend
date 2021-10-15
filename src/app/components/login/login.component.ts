@@ -1,4 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ClientMessage } from 'src/app/models/client-message';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -13,33 +16,29 @@ export class LoginComponent implements OnInit {
   public user = new User(0, '', '', '', [], []);
   public clientMessage = new ClientMessage('');
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
   public loginUser(): void {
     // call this.userService.registerUser() method and post it
     this.userService.loginUser(this.user)
       .subscribe( // subscribe to the data returned and do something like generate client message
-        data => {
-          if (data.password != "" && data.password == this.user.password) {
-            console.log(`Correct!!`);
-            // assign a JWT token
-            // redirect to either home page.
-            //==================================
-            // send correct stuff as json to backend 
-            // backend will check those values against db
-            // then send back a token to front end
-          }
-          else {
-            console.log(`Wrong!! ${data.password} answer:${this.user.password}`);
-            // pop up
-            // refresh the page 
-          }
-        },
-        error => this.clientMessage.message = `Something went wrong. Error: ${error}` // console.error(`We got an error: ${error}` 
+        (data => {
+          this.successToastr();
+          this.router.navigate(['/home']);
+        }),
+        (error => {
+          this.errorToastr();
+        }) // console.error(`We got an error: ${error}` 
       )
     // TODO: if everything is successful, post an alert to be rendered in the view if we add successfully
   }
 
+  public successToastr() {
+    this.toastr.success(`Generating a token for ${this.user.username.toUpperCase()}!`, "Login Successful!");
+  }
+  public errorToastr() {
+    this.toastr.error("Some message", "Title");
+  }
   ngOnInit(): void {
   }
 

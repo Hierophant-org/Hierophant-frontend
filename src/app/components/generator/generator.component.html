@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+ 
+
+>>>>>>> main
 <div class="app">
 
     <div class="container">
@@ -89,6 +94,7 @@
                                 
                             </div>
                           </div>
+<<<<<<< HEAD
                           <div class="form-group">
                             <label for="">Upload an Image</label>
                             <input type="file" class="form-control" accept="image/*" (change)='drawImage($event);'>
@@ -96,6 +102,21 @@
                         </div>
                           
                      </form>
+=======
+                          <label for="">Upload an Image</label>
+                      <input type="file" #imagefile name="file" class="form-control" accept="image/*" (change)='drawImage($event)'>
+                      <br><div #subbutn><button   (click)="updateImage()">SUBMIT</button></div>
+                      
+                          
+                     </form>
+                          
+
+                     <div >
+                      
+                      
+                     </div>
+
+>>>>>>> main
 
                    </div>
                </div>
@@ -105,20 +126,34 @@
              <div class="col-md-6" id="preview_container">
              <!--Preview Stuff-->
                 
+<<<<<<< HEAD
                 <canvas #memeCanvas [width]="ImageWidth" [height]="ImageHeight"> 
+=======
+                <canvas #memeCanvas id="memeCanvas" [width]="ImageWidth" [height]="ImageHeight"> 
+>>>>>>> main
                 </canvas>
                 <div appFreeDragging class="example-box"  id="overlay1" [style.color]="topTextColor"      [style.font-size]='topTextSize'    [style.font-family]='topTextFont'     >{{topText}}</div>
                 <div appFreeDragging class="example-box"  id="overlay2" [style.color]="bottomTextColor"   [style.font-size]='bottomTextSize' [style.font-family]='bottomTextFont'  >{{bottomText}}</div>
                 
               </div>
+<<<<<<< HEAD
               <div #subbutn><button (click)="saveImage($event);">Submit Meme</button></div>
+=======
+              
+>>>>>>> main
              <div class="col-md-12">
               <!--meme Stuff-->
                    
                    Pick a popular Meme Image<br>
+<<<<<<< HEAD
                   
                     <img [src]="memes[i].url"  width = 100px height = 100px  *ngFor="let num of memes; let i = index" (click)="drawImage($event);" />
                   
+=======
+                    
+                    <a [href] = "memes[i].url" *ngFor="let num of memes; let i = index"  download target="_blank"><img [src]="memes[i].url" id="i" width = 100px height = 100px  /></a>
+                     
+>>>>>>> main
               </div>
 
 

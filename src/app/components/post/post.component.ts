@@ -1,9 +1,14 @@
+import { CommentService } from './../../services/comment.service';
+import { Comment } from 'src/app/models/comment';
 import { User } from './../../models/user';
 import { Post } from 'src/app/models/post';
 import { PostService } from './../../services/post.service';
 import { Component, OnInit } from '@angular/core';
 import { ClientMessage } from 'src/app/models/client-message';
-import { waitForAsync } from '@angular/core/testing';
+import { forkJoin, Observable, scheduled, Scheduler, zip } from 'rxjs';
+import { concat } from 'rxjs';
+import { concatAll, map, withLatestFrom } from 'rxjs/operators';
+import { Image } from 'src/app/models/image';
 
 @Component({
   selector: 'app-post',
@@ -15,29 +20,51 @@ export class PostComponent implements OnInit {
   title = "All Posts"
   public posts: Post[] = [];
   public users: User[] = [];
+  private _activeValue = "";
+  private numberOfUpvotes: number = 0;
+  private id: number = 0;
 
   public clientMessage = new ClientMessage('No Posts to show ):');
-
-  constructor(private postServ: PostService) {
-   
-
-  }
-
+  constructor(private postServ: PostService, private comServ: CommentService) { }
   ngOnInit(): void {
-    this.findAllPosts()
-    this.setUsers();
+    this.findAllPosts();
   }
+
   public findAllPosts() {
-    this.postServ.findAllPosts() // every object that is captured from the observabel is set as our users array
-      .subscribe(data => { this.posts = data }) // this defines what we do with the data returned from the observable
-   
+    const observable = forkJoin({
+      p: this.postServ.findAllPosts(),
+      u: this.postServ.findAllPostUsers(),
+    }).subscribe(data => {
+      this.posts = data.p;
+      this.users = data.u;
+      for (let index = 0; index < this.posts.length; index++) {
+        this.posts[index].userId = this.users[index];
+        this.numberOfUpvotes = data.p[index].upvotes;
+      }
+      this.posts.forEach(pos => {
+        for (let index = 0; index < pos.comments.length; index++) {
+          this.comServ.findWhoCommented(pos.comments[index].comId).subscribe(
+            data => pos.comments[index].userId = data
+          )}
+        }
+      )
+    })
   }
-  public setUsers() {
-    this.postServ.findAllPostUsers() // every object that is captured from the observabel is set as our users array
-      .subscribe(data => { this.users = data }) // this defines what we do with the data returned from the observable
-    for (let index = 0; index < this.posts.length; index++) {
-      this.posts[index].userId = this.users[index];
-      console.log(this.posts[index]);
+
+  public onChange(event: { value: string; }, group: { value: string }, p: Post) {
+    if (this._activeValue === event.value) {
+      // make unchecked
+      this.numberOfUpvotes = (parseInt(event.value) - 1);
+      // update the database here
+      p.upvotes = this.numberOfUpvotes;
+      this.postServ.updateVotes(p).subscribe();
+      group.value = "";
+    } else {
+      this._activeValue = event.value;
+      this.numberOfUpvotes = (parseInt(event.value) + 1);
+      p.upvotes = this.numberOfUpvotes;
+      this.postServ.updateVotes(p).subscribe();
+      this._activeValue = (parseInt(event.value) + 1).toString();
     }
   }
 }
