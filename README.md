@@ -1,3 +1,5 @@
+#Front-end URL : http://hierophant-frontend-bucket.s3-website.us-east-2.amazonaws.com/
+
 # Hierophant Angular
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.8.
 

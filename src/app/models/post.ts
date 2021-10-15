@@ -1,3 +1,4 @@
+import { Comment } from 'src/app/models/comment';
 import { Image } from './image';
 import { User } from './user';
 export class Post {
@@ -6,7 +7,7 @@ export class Post {
     userId: User;
     image: Image;
     upvotes: number;
-    comments: any[];
+    comments: Comment[];
 
     constructor(
         postId: number,
@@ -14,7 +15,7 @@ export class Post {
         userId: User,
         image: Image,
         upvotes: number,
-        comments: any[]
+        comments: Comment[]
     ) {
         this.postId = postId
         this.title = title

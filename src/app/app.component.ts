@@ -9,5 +9,5 @@ import { ToastService } from './services/toast.service';
 })
 export class AppComponent {
   title = 'hierophant-site';
- 
+
 }

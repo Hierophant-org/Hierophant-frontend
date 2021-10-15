@@ -5,9 +5,7 @@
 export const environment = {
   production: false
 };
-export const localUrl = `http://localhost:5000/hierophant`;
-export const awsUrl = `http://hierophantbackendpipe-env.eba-v2pxdpwf.us-east-1.elasticbeanstalk.com/hierophant`;
-
+export const backendUrl = `http://localhost:5000/hierophant`;
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
