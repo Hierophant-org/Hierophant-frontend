@@ -18,6 +18,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { CommentComponent } from './components/comment/comment.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonToggleModule,
     MatIconModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   // 
   providers: [AuthInterceptorProvider],

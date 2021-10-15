@@ -53,3 +53,10 @@ mat-button-toggle-group {
     position: relative;
     top: 4px;
 }
+
+.commentButton {
+    position: relative;
+    display: inline-flex;
+    flex-direction: row;
+    float: right;
+}
