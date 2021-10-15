@@ -15,16 +15,6 @@
             <li class="list-group-item">Post Title: {{ p.title }}</li>
             <li class="list-group-item">Post Image: {{ p.image.imgHtml }}</li>
             <li class="list-group-item">
-                <!-- <app-comment [parentPost]=p.postId></app-comment> -->
-            <li class="list-group-item">
-                <ul *ngFor="let c of p.comments" class="list-group">
-                    Commment:
-                    <li class="list-group-item">Posted By: {{(c.userId)?.username}}</li>
-                    <li class="list-group-item">"{{ c.commText }}"</li>
-                    <li class="list-group-item">Upvotes: {{ c.upvotes }}</li>
-                </ul>
-            </li>
-            <li class="list-group-item">
                 <p>Upvotes: {{ p.upvotes }}</p>
                 <mat-button-toggle-group #group="matButtonToggleGroup">
                     <mat-button-toggle class="upvote" value={{p.upvotes}} id={{p.postId}}
@@ -33,8 +23,15 @@
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </li>
+            <li class="list-group-item">
+                <ul *ngFor="let c of p.comments" class="list-group">
+                    Commment:
+                    <li class="list-group-item">Posted By: {{(c.userId)?.username}}</li>
+                    <li class="list-group-item">"{{ c.commText }}"</li>
+                    <li class="list-group-item">Upvotes: {{ c.upvotes }}</li>
+                </ul>
+            </li>
         </ul>
-
     </div>
     <div *ngIf="posts.length == 0" style="text-align: center">
         <!-- This element will only be present on the DOM IF there are no users in the array-->
