@@ -34,9 +34,6 @@ export class PostComponent implements OnInit {
       p: this.postServ.findAllPosts(),
       u: this.postServ.findAllPostUsers()
     }).subscribe(data => {
-
-      // this.posts[i].userId = data.u[i];
-      // this.posts = data.p;
       this.posts = data.p;
       this.users = data.u;
       for (let index = 0; index < this.posts.length; index++) {
@@ -48,14 +45,6 @@ export class PostComponent implements OnInit {
 
     })
   }
-  // public setUsers() {
-  //   for (let index = 0; index < this.posts.length; index++) {
-  //     this.posts[index].userId = this.users[index];
-  //     console.log(this.posts[index]);
-  //   }
-  // }
-  //
-
 
   public onChange(event: { value: string; }, group: { value: string }, p: Post) {
     if (this._activeValue === event.value) {

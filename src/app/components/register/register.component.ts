@@ -18,28 +18,6 @@ export class RegisterComponent implements OnInit {
   public clientMessage = new ClientMessage('');
   constructor(private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
-  // showStandard() {
-  //   this.toastService.show(this.clientMessage.message, {
-  //     delay: 2000,
-  //     autohide: true
-  //   });
-  // }
-  // showSuccess() {
-  //   this.toastService.show(this.clientMessage.message, {
-  //     classname: 'bg-success text-light',
-  //     delay: 2000 ,
-  //     autohide: true,
-  //     headertext: 'Toast Header'
-  //   });
-  // }
-  // showError() {
-  //   this.toastService.show(this.clientMessage.message, {
-  //     classname: 'bg-danger text-light',
-  //     delay: 2000 ,
-  //     autohide: true,
-  //     headertext: 'Error!!!'
-  //   });
-  //   }
   public registerUser(): void {
     // call this.userService.registerUser() method and post it
     if (this.user.username === "" && this.user.password === "" && this.user.email === "") {

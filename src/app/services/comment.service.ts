@@ -17,30 +17,26 @@ export class CommentService {
   username: string = "";
   postObj: any;
   obj: any;
-  constructor(private http: HttpClient,private userService:UserService) { }
-  
+  constructor(private http: HttpClient, private userService: UserService) { }
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
   findWhoCommented(postId: number, comId: number) {
     return this.http.get<Comment[]>(`${url}/findUser`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
-    .pipe(
-      catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
-    )
+      .pipe(
+        catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
+      )
   }
   public createComment(comment: Comment): Observable<Comment> {
     console.log(comment);
-    // const headers = new HttpHeaders().set('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJhdWQiOiJVc2VyIFRva2VuIFBvcnRhbCIsInN1YiI6InRoaW5oIiwiaXNzIjoiQ3JlYXRlZCBieSBoaWVyb3BoYW50IiwiZXhwIjoxNjM0MTI2MTA0LCJpYXQiOjE2MzQwOTczMDR9.4l6AyQ0hyGHZH2NkLiTNtCTX3rfILsE5Z_JyhTcWs9jGyzDYMFko0X7xZhzFtzWzr-bBl41e2MBt9fFfxTQueQ');
-    // , { headers }
-    this.token = this.userService.getToken();
-    const headers = new HttpHeaders().set('Authorization', this.token);
-    return this.http.post<Comment>(`${url}/insert`, comment, { headers }) // url, user, this.httpOptions
+    return this.http.post<Comment>(`${url}/insert`, comment) // url, user, this.httpOptions
       .pipe( // we are calling a method on the data returned in the observable
         catchError(this.handleError) // passing a callback
       )
   }
   // GET
-  public findAllComments(postId:number): Observable<Comment[]> {  // An Observable  is a stream of values that wil be returned at over
+  public findAllComments(postId: number): Observable<Comment[]> {  // An Observable  is a stream of values that wil be returned at over
     // send a get request and return a collection of User objects
 
     return this.http.get<Comment[]>(`${url}/findByPostId?id=${postId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
@@ -48,7 +44,7 @@ export class CommentService {
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
   }
-  public findAllCommentUsers(postId:number): Observable<User[]> {  // An Observable  is a stream of values that wil be returned at over
+  public findAllCommentUsers(postId: number): Observable<User[]> {  // An Observable  is a stream of values that wil be returned at over
     // send a get request and return a collection of User objects
 
     return this.http.get<User[]>(`${url}/findAllUsers?id=${postId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
