@@ -1,0 +1,66 @@
+.example-box {
+    /*width: 200px;
+     height: 200px;*/
+   /* border: solid 1px #ccc;*/
+    color: rgb(0, 0, 0);
+    cursor: move;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    background-color: rgba(169, 169, 169, 0);
+    font-size : 40px;
+    
+    font-family: 'fantasy';
+    font-style: italic;
+   
+    /* transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); */
+  }
+
+  .example-box.free-dragging {
+    /*box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);*/
+  }
+  #preview_container 
+  {
+    position: relative;
+  }
+
+  #preview_container canvas, #overlay1 ,#overlay2 
+  {
+    position: absolute;
+   
+  }
+  #overlay2
+  {
+    top:300px;
+  }
+  canvas
+  {
+   transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); 
+
+  }
+  #subbutn
+  {
+      text-align:right
+  }
+  img:hover
+  {
+     
+     border-color: grey;
+     border-style:outset;
+  }
+  img:active
+  {
+      border-color: red;
+      border-style: solid;
+  }
+  
