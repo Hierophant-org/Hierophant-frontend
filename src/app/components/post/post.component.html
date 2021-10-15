@@ -25,7 +25,6 @@
                     Commment:
                     <li class="list-group-item">Posted By: {{(c.userId)?.username}}</li>
                     <li class="list-group-item">"{{ c.commText }}"</li>
-                    <li class="list-group-item">Upvotes: {{ c.upvotes }}</li>
                 </ul>
             </mat-card-content>
             <mat-card-actions>
@@ -46,7 +45,7 @@
                         </div>
                     </mat-button-toggle>
                 </mat-button-toggle-group>
-                <button mat-button>Comment</button>
+                <app-comment [parentPost]=p class="commentComponent"></app-comment>
             </mat-card-actions>
         </mat-card>
         <hr>

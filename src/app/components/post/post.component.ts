@@ -51,7 +51,6 @@ export class PostComponent implements OnInit {
     })
   }
 
-
   public onChange(event: { value: string; }, group: { value: string }, p: Post) {
     if (this._activeValue === event.value) {
       // make unchecked
