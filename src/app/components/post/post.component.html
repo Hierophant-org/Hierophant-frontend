@@ -31,8 +31,11 @@
                         </ul>
                         <br>
                         <div *ngIf="userServ.getToken() != 'Bearer null'; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock><app-comment [parentPost]=p class="commentComponent"></app-comment></ng-template>
-                        <ng-template #elseBlock><a href="/login"><button type="submit" class="btn btn-primary">Login to Comment!</button></a></ng-template>
+                        <ng-template #thenBlock>
+                            <app-comment [parentPost]=p class="commentComponent"></app-comment>
+                        </ng-template>
+                        <ng-template #elseBlock><a href="/login"><button type="submit" class="btn btn-primary">Login to
+                                    Comment!</button></a></ng-template>
                     </mat-expansion-panel>
                 </mat-accordion>
             </mat-card-content>
@@ -64,10 +67,10 @@
     <div *ngIf="posts.length == 0" style="text-align: center">
         <!-- This element will only be present on the DOM IF there are no users in the array-->
         <mat-card>
-        <h5>{{ clientMessage.message }}</h5>
+            <h5>{{ clientMessage.message }}</h5>
         </mat-card>
     </div>
-    
+
 
 
 

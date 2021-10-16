@@ -7,14 +7,7 @@ import { Injectable } from '@angular/core';
 
 export class GeneratorService {
 
-
   constructor(private http: HttpClient) { }
-  // 'Content-Type': 'application/json',
-  httpOptions = {
-    headers: new HttpHeaders({
-
-    })
-  }
 
   public getMemes() {
     console.log("calling api endpoint")

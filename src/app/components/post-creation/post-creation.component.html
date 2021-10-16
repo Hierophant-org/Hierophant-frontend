@@ -23,9 +23,16 @@
                     </div>
                     <div class="overflow-auto ">
                         <div class="scrollmenu">
-                            <button *ngFor="let t of templates" class="template-image" (click)="setImageHtml(t)">
-                                <img src={{t}} alt="great meme template" height="150">
-                            </button>
+
+                            <label *ngFor="let t of memes">
+                                <input type="radio" name="test" value="small" checked (click)="setImageHtml(t.url)">
+                                <img [src]=t.url alt="great meme template" height="150">
+                            </label>
+
+
+                            <!-- <button *ngFor="let t of memes" class="template-image" (click)="setImageHtml(t.url)">
+                                <img [src]=t.url alt="great meme template" height="150">
+                            </button> -->
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" (click)="createPost()">Share</button>
