@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Comment } from 'src/app/models/comment';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -19,7 +21,7 @@ export class CommentComponent implements OnInit {
   nameFromToken: any = this.postCreation.getDecodedAccessToken();
   user: User = new User(0, this.nameFromToken.sub, '', '', [], []);
   public comment = new Comment(0, this.user, this.parentPost, '', 0);
-  constructor(private postCreation: PostCreationService, private userService: UserService, private commentService: CommentService) { }
+  constructor(private postCreation: PostCreationService, private userService: UserService, private commentService: CommentService,private toastr: ToastrService, private router: Router) {}
 
   ngOnInit(): void {
     this.getUserId()
@@ -38,15 +40,21 @@ export class CommentComponent implements OnInit {
     this.commentService.createComment(this.comment)
       .subscribe( // subscribe to the data returned and do something like generate client message
         (data => {
-          console.log(`success ${data}`)
-          // this.successToastr();
-          // this.router.navigate(['/login']);
+          console.log(`success ${data}`),
+          this.successToastr(),
+          this.router.navigate(['/home'])
         }),
         (error => {
+          this.errorToastr();
           console.log(`failed ${error}`)
-          // this.errorToastr(405);
         })
       )
+  }
+  public successToastr() {
+    this.toastr.success(`Comment posted`, "Comment Successful!");
+  }
+  public errorToastr() {
+    this.toastr.error("Something went wrong, try again later", "Comment unsuccessful");
   }
 
 }
