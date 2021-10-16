@@ -28,6 +28,10 @@ mat-button-toggle {
     border: 1px rgba(0, 0, 0, 0) solid;
 }
 
+::ng-deep .mat-button-toggle-checked button:hover {
+    color: white;
+}
+
 .upvote {
     color: white;
 }

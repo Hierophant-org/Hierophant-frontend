@@ -163,7 +163,8 @@ export class GeneratorComponent implements OnInit {
 
 
   getMemes() {
-    this.http.get<any>("https://api.imgflip.com/get_memes").subscribe
+    this.http.get<any>("https://api.imgflip.com/get_memes", { headers: { skip: "true" } }
+    ).subscribe
       (
         response => {
 

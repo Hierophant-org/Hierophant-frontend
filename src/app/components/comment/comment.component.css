@@ -2,3 +2,8 @@
     position: relative;
     float: right;
 }
+
+#inputUsername {
+    color: aliceblue;
+    background-color: rgb(24, 26, 27);
+}
