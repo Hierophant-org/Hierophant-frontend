@@ -185,8 +185,8 @@ changeFontOfBottomText(e:any)
 
 getMemes()
 {
-  ////*"https://api.imgflip.com/get_memes"*/
-  this.http.get<any>(  "http://alpha-meme-maker.herokuapp.com/1"   ).subscribe
+  ////**/
+  this.http.get<any>(  "https://api.imgflip.com/get_memes" ).subscribe
   (
    response =>
    {
@@ -211,7 +211,7 @@ addTextToCanvas()
   this.btx = bc2.x  - cc.x;
   this.bty = bc2.y  - cc.y + rect2!.getBoundingClientRect().height / 2;
   
-  //let canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
+ 
   var ctx = canvas.getContext("2d");
   ctx!.font = this.topTextSize+" "+this.topTextFont;
   ctx!.fillStyle = this.topTextColor;
@@ -222,65 +222,10 @@ addTextToCanvas()
 
 }
 
-updateImage()
-{
 
-
-
-
-
-  
-  
-      // let file: File = this.file;
-      // let formData:FormData = new FormData();
-      // formData.append('myImage', file, file.name);
-      // let headers = new Headers();
-      // /** In Angular 5, including the header Content-Type can invalidate your request */
-      // headers.append('Content-Type', 'multipart/form-data');
-      // headers.append('Accept', 'application/json');
-      // let options = new RequestOptions({ headers: headers });
-      // this.http.post(`http://localhost:5000/images/UpImg`, formData, options)
-      //     .map(res => res.json())
-      //     .catch(error => Observable.throw(error))
-      //     .subscribe(
-      //         data => console.log('success'),
-      //         error => console.log(error)
-      //     )
-  
-
-  
-  // let canvas = this.ImageCanvas.nativeElement ;
-  // //let canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
-  // this.addTextToCanvas();
-  // //var canvasData = canvas.toDataURL("image/png");
-
-  // var fd = new FormData();
-  // let headers = new Headers();
-  // headers.append('Content-Type', 'multipart/form-data');
-  // headers.append('Accept', 'application/json');
-
-  //    let options = new RequestOptions({ headers: headers });
-  //    var blob = new Blob(canvas.toDataURL('images/jpg'), {type : 'application/json'});
-  //     let beelob = new File([blob], this.file.name);
-  //     console.log(beelob);
-  //   fd.append("myImage", beelob , this.file.name);
-     
-  //      console.log(fd)
-  //      this.http.post('localhost:5000/hierophant/images/uploadImage' , fd)
-  //           .map(res => res.json())
-  //           .catch(error => Observable.throw(error))
-  //           .subscribe(
-  //               data => console.log('success'),
-  //               error => console.log(error)
-  //      )
-    
-  
-  
-}
 
 uploadFile(){
- let canvas = this.ImageCanvas.nativeElement ;
-   //canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
+  let canvas = this.ImageCanvas.nativeElement ;
   this.addTextToCanvas();
   var canvasData = canvas.toDataURL("image/png");
   var fd = new FormData();
@@ -288,14 +233,9 @@ uploadFile(){
       let beelob = new File([ canvas.toDataURL("image/png")], this.file.name);
        console.log(beelob);
     fd.append("myImage", beelob );
-
-  ////******** */
-console.log("uploading Image...");
   let formData = new FormData();
   formData.append('myImage', this.file);
-
   let params = new HttpParams();
-
   const options = {
     params: params,
     reportProgress: false,
