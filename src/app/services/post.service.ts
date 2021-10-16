@@ -42,10 +42,10 @@ export class PostService {
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
   }
-  public findAllPostUsers(): Observable<User[]> {  // An Observable  is a stream of values that wil be returned at over
+  public findPoster(postId: number): Observable<User> {  // An Observable  is a stream of values that wil be returned at over
     // send a get request and return a collection of User objects
 
-    return this.http.get<User[]>(`${url}/findAllUsers`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
+    return this.http.get<User>(`${url}/findAllUsers?id=${postId}`, { headers: { skip: "true" } }) // by default a fetch request is asynchronous
       .pipe(
         catchError(this.handleError) // in our component, we subscribe to the observable that htis returns
       )
