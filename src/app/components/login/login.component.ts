@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
 import { ClientMessage } from 'src/app/models/client-message';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   title = "Login";
   public user = new User(0, '', '', '', [], []);
   public clientMessage = new ClientMessage('');
+  private readonly TOKEN_NAME = 'Hierophant Token';
 
   constructor(private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.toastr.success(`Generating a token for ${this.user.username.toUpperCase()}!`, "Login Successful!");
   }
   public errorToastr() {
-    this.toastr.error("Some message", "Title");
+    this.toastr.error("Try again later", "Login Failed");
   }
   ngOnInit(): void {
   }

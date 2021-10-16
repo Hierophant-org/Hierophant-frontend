@@ -1,14 +1,13 @@
+import { UserService } from './../../services/user.service';
 import { CommentService } from './../../services/comment.service';
-import { Comment } from 'src/app/models/comment';
 import { User } from './../../models/user';
 import { Post } from 'src/app/models/post';
 import { PostService } from './../../services/post.service';
 import { Component, OnInit } from '@angular/core';
 import { ClientMessage } from 'src/app/models/client-message';
-import { forkJoin, Observable, scheduled, Scheduler, zip } from 'rxjs';
-import { concat } from 'rxjs';
-import { concatAll, map, withLatestFrom } from 'rxjs/operators';
-import { Image } from 'src/app/models/image';
+import { forkJoin } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-post',
@@ -16,8 +15,7 @@ import { Image } from 'src/app/models/image';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-
-  title = "All Posts"
+  panelOpenState = false;
   public posts: Post[] = [];
   public users: User[] = [];
   private _activeValue = "";
@@ -25,7 +23,7 @@ export class PostComponent implements OnInit {
   private id: number = 0;
 
   public clientMessage = new ClientMessage('No Posts to show ):');
-  constructor(private postServ: PostService, private comServ: CommentService) { }
+  constructor(private postServ: PostService, private comServ: CommentService, public userServ: UserService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.findAllPosts();
   }
@@ -45,26 +43,36 @@ export class PostComponent implements OnInit {
         for (let index = 0; index < pos.comments.length; index++) {
           this.comServ.findWhoCommented(pos.comments[index].comId).subscribe(
             data => pos.comments[index].userId = data
-          )}
+          )
         }
+      }
       )
     })
   }
 
   public onChange(event: { value: string; }, group: { value: string }, p: Post) {
-    if (this._activeValue === event.value) {
-      // make unchecked
-      this.numberOfUpvotes = (parseInt(event.value) - 1);
-      // update the database here
-      p.upvotes = this.numberOfUpvotes;
-      this.postServ.updateVotes(p).subscribe();
-      group.value = "";
-    } else {
-      this._activeValue = event.value;
-      this.numberOfUpvotes = (parseInt(event.value) + 1);
-      p.upvotes = this.numberOfUpvotes;
-      this.postServ.updateVotes(p).subscribe();
-      this._activeValue = (parseInt(event.value) + 1).toString();
+    if (this.userServ.getToken() != 'Bearer null') {
+      if (this._activeValue === event.value) {
+        // make unchecked
+        this.numberOfUpvotes = (parseInt(event.value) - 1);
+        // update the database here
+        p.upvotes = this.numberOfUpvotes;
+        this.postServ.updateVotes(p).subscribe();
+        group.value = "";
+      } else {
+        this._activeValue = event.value;
+        this.numberOfUpvotes = (parseInt(event.value) + 1);
+        p.upvotes = this.numberOfUpvotes;
+        this.postServ.updateVotes(p).subscribe();
+        this._activeValue = (parseInt(event.value) + 1).toString();
+      }
+    }
+    else {
+      this.errorToastr();
     }
   }
+  public errorToastr() {
+    this.toastr.error("Login to upvote!", "Oops");
+  }
+
 }

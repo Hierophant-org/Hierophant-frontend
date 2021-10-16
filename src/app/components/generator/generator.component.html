@@ -1,137 +1,119 @@
- 
-
 <div class="app">
-
-    <div class="container">
-         <div class="row">
-             <div class="col-md-6">
-             <!--Generator Stuff-->
-               <div class="card">
-                   <div class="card-body">
-                     <form>
-                          <!--Top Text -->
-                          <div class="form-group">
-                            <div>
-                            <label for="">Top Text</label>
-                            <textarea class="form-control" id="tt" name="topText" [(ngModel)] = topText ></textarea>
-                            </div>
-                            <div>
-                            <label for="">Text Size</label><br>
-                            <input type="range" min="10" max="150"  class="slider" id="ttSize" name = "topTextSizeInput" [ngModel]= "topTextSize" (change)='changeSizeOfTopText($event);'>
-                            </div>
-                            <div class="form-group">
-                              <label for="">Top Text Color</label><br>
-                              <input type="color" id="head" name="head" [value]="topTextColor" (change)='changeColorOfTopText($event)'>
-                            </div>
-                            <div>
-                              <label for="">Top Text Font</label><br>
-                            <select name="topTextFontInput" [(ngModel)]=topTextFont (change)='changeFontOfTopText($event);' >
-                              <option value="'Times New Roman', Times, serif" selected ="selected">Times
-                              </option>
-                              <option value="'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande'">Lucida        
-                              </option>
-                              <option value="Arial, Helvetica, sans-serif">Arial   
-                              </option>
-                              <option value="'Georgia'">Georgia
-                              </option>
-                              <option value="'Verdana'">Verdana
-                              </option>
-                              <option value="'Tahoma'">Tahoma
-                              </option>
-                              <option value="'Brush Script MT'">Cursive
-                              </option>
-                              <option value="'Courier New'">Courier
-                              </option>
-                            </select>
-                            </div>
-                          </div>
-
-                           <!--Bottom Text -->
-                          <div class="form-group">
-                            <div>
-                            <label for="">Bottom Text</label>
-                            <textarea class="form-control" id="bt" name="bottomText" [(ngModel)] = bottomText ></textarea>
-                            </div>
-                            <div>
-                            <label for="">Text Size</label><br>
-                            <input type="range" min="10" max="150" value="50" class="slider" id="myRange" name= "BottomTextSizeInput"[(ngModel)] = bottomTextSize (change)='changeSizeOfBottomText($event);' >
-                            </div>
-                            <div class="form-group">
-                              <label for="">Bottom Text Color</label><br>
-                              <input type='color' [value]="bottomTextColor" (change)='changeColorOfBottomText($event);'>
-                          </div>
-                          <div>
-                            <label for="">Bottom Text Font</label><br>
-                            <select  name="bottomTextFontInput" [(ngModel)]=bottomTextFont (change)='changeFontOfBottomText($event);'>
-                                      <option value="'Times New Roman', Times, serif" selected ="selected">Times
-                                      </option>
-                                      <option value="'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande'">Lucida        
-                                      </option>
-                                      <option value="Arial, Helvetica, sans-serif">Arial   
-                                      </option>
-                                      <option value="'Georgia'">Georgia
-                                      </option>
-                                      <option value="'Verdana'">Verdana
-                                      </option>
-                                      <option value="'Tahoma'">Tahoma
-                                      </option>
-                                      <option value="'Brush Script MT'">Cursive
-                                      </option>
-                                      <option value="'Courier New'">Courier
-                                      </option>
-                            </select>
-                            </div>
-                        </div>
-
-                          <div class="row">
-                            <div class="col-md-6">
-                                
-                            </div>
-                            <div class="col-md-6">
-                                
-                            </div>
-                          </div>
-                          <label for="">Upload an Image</label>
-                      <input type="file" #imagefile name="file" class="form-control" accept="image/*" (change)='drawImage($event)'>
-                      <br><div #subbutn><button   (click)="uploadFile();">SUBMIT</button></div>
-                      
-                          
-                     </form>
-                          
-
-                     <div >
-                      
-                      
-                     </div>
-
-
-                   </div>
-               </div>
-
-
-             </div>
-             <div class="col-md-6" id="preview_container">
-             <!--Preview Stuff-->
-                
-                <canvas #memeCanvas id="memeCanvas" [width]="ImageWidth" [height]="ImageHeight"> 
-                </canvas>
-                <div appFreeDragging class="example-box"  id="overlay1" [style.color]="topTextColor"      [style.font-size]='topTextSize'    [style.font-family]='topTextFont'     >{{topText}}</div>
-                <div appFreeDragging class="example-box"  id="overlay2" [style.color]="bottomTextColor"   [style.font-size]='bottomTextSize' [style.font-family]='bottomTextFont'  >{{bottomText}}</div>
-                
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <!--Generator Stuff-->
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <!--Top Text -->
+              <div class="form-group">
+                <div>
+                  <label for="">Top Text</label>
+                  <textarea class="form-control" id="tt" name="topText" [(ngModel)]=topText></textarea>
+                </div>
+                <div>
+                  <label for="">Text Size</label><br>
+                  <input type="range" min="10" max="150" class="slider" id="ttSize" name="topTextSizeInput"
+                    [ngModel]="topTextSize" (change)='changeSizeOfTopText($event);'>
+                </div>
+                <div class="form-group">
+                  <label for="">Top Text Color</label><br>
+                  <input type="color" id="head" name="head" [value]="topTextColor"
+                    (change)='changeColorOfTopText($event)'>
+                </div>
+                <div>
+                  <label for="">Top Text Font</label><br>
+                  <select name="topTextFontInput" [(ngModel)]=topTextFont (change)='changeFontOfTopText($event);'>
+                    <option value="'Times New Roman', Times, serif" selected="selected">Times
+                    </option>
+                    <option value="'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande'">Lucida
+                    </option>
+                    <option value="Arial, Helvetica, sans-serif">Arial
+                    </option>
+                    <option value="'Georgia'">Georgia
+                    </option>
+                    <option value="'Verdana'">Verdana
+                    </option>
+                    <option value="'Tahoma'">Tahoma
+                    </option>
+                    <option value="'Brush Script MT'">Cursive
+                    </option>
+                    <option value="'Courier New'">Courier
+                    </option>
+                  </select>
+                </div>
               </div>
-              
-             <div class="col-md-12">
-              <!--meme Stuff-->
-                   
-                   Pick a popular Meme Image<br>
-                    
-                    <a [href] = "memes[i].url" *ngFor="let num of memes; let i = index"  download target="_blank"><img [src]="memes[i].url" id="i" width = 100px height = 100px  /></a>
-                     
+              <!--Bottom Text -->
+              <div class="form-group">
+                <div>
+                  <label for="">Bottom Text</label>
+                  <textarea class="form-control" id="bt" name="bottomText" [(ngModel)]=bottomText></textarea>
+                </div>
+                <div>
+                  <label for="">Text Size</label><br>
+                  <input type="range" min="10" max="150" value="50" class="slider" id="myRange"
+                    name="BottomTextSizeInput" [(ngModel)]=bottomTextSize (change)='changeSizeOfBottomText($event);'>
+                </div>
+                <div class="form-group">
+                  <label for="">Bottom Text Color</label><br>
+                  <input type='color' [value]="bottomTextColor" (change)='changeColorOfBottomText($event);'>
+                </div>
+                <div>
+                  <label for="">Bottom Text Font</label><br>
+                  <select name="bottomTextFontInput" [(ngModel)]=bottomTextFont
+                    (change)='changeFontOfBottomText($event);'>
+                    <option value="'Times New Roman', Times, serif" selected="selected">Times
+                    </option>
+                    <option value="'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande'">Lucida
+                    </option>
+                    <option value="Arial, Helvetica, sans-serif">Arial
+                    </option>
+                    <option value="'Georgia'">Georgia
+                    </option>
+                    <option value="'Verdana'">Verdana
+                    </option>
+                    <option value="'Tahoma'">Tahoma
+                    </option>
+                    <option value="'Brush Script MT'">Cursive
+                    </option>
+                    <option value="'Courier New'">Courier
+                    </option>
+                  </select>
+                </div>
               </div>
-
-
-         </div>
+              <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                </div>
+              </div>
+              <label for="">Upload an Image</label>
+              <input type="file" #imagefile name="file" class="form-control" accept="image/*"
+                (change)='drawImage($event)'>
+              <br>
+              <div #subbutn><button (click)="uploadFile()">SUBMIT</button></div>
+            </form>
+            <div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" id="preview_container">
+        <!--Preview Stuff-->
+        <canvas #memeCanvas id="memeCanvas" [width]="ImageWidth" [height]="ImageHeight">
+        </canvas>
+        <div appFreeDragging class="example-box" id="overlay1" [style.color]="topTextColor"
+          [style.font-size]='topTextSize' [style.font-family]='topTextFont'>{{topText}}</div>
+        <div appFreeDragging class="example-box" id="overlay2" [style.color]="bottomTextColor"
+          [style.font-size]='bottomTextSize' [style.font-family]='bottomTextFont'>{{bottomText}}</div>
+      </div>
+      <div class="col-md-12">
+        <!--meme Stuff-->
+        Pick a popular Meme Image<br>
+        <a [href]="memes[i].url" *ngFor="let num of memes; let i = index" download target="_blank"><img
+            [src]="memes[i].url" id="i" width=100px height=100px /></a>
+      </div>
     </div>
+  </div>
 </div>
-
-

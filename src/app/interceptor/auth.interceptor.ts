@@ -15,13 +15,11 @@ import { Observable, of } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private userService: UserService) { }
 
-  //home dont need a token 
-  // request.url.match('/home')
-
-
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
     if (request.headers.get("skip")) {
+      return next.handle(request);
+    }
+    else if (request.url === "https://api.imgflip.com/get_memes") {
       return next.handle(request);
     }
     else {

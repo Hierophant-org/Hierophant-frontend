@@ -3,13 +3,12 @@ div.scrollmenu {
   overflow: auto;
   white-space: nowrap;
 }
-.overflow-auto{
-    padding-top: 10px;
-    padding-bottom: 25px;
+
+.overflow-auto {
+  padding-top: 10px;
+  padding-bottom: 25px;
 }
-button{
-    margin: 2px;
-}
+
 div.scrollmenu a {
   display: inline-block;
   color: white;
@@ -20,4 +19,11 @@ div.scrollmenu a {
 
 div.scrollmenu a:hover {
   background-color: #777;
+}
+
+.card {
+  background: linear-gradient(0deg, #2b5876, #4e4376) !important;
+  /* 2b5876 4e4376 */
+  color: #fff !important;
+  box-shadow: 0 1px 5px 10px rgb(0 0 0 / 0.2) !important;
 }

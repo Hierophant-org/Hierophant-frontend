@@ -12,8 +12,6 @@ export class MEME
   }
 }
 
-
-
 @Component({
   selector: 'app-generator',
   templateUrl: './generator.component.html',
@@ -185,7 +183,7 @@ changeFontOfBottomText(e:any)
 
 getMemes()
 {
-  ////**/
+  
   this.http.get<any>(  "https://api.imgflip.com/get_memes" ).subscribe
   (
    response =>
@@ -210,8 +208,6 @@ addTextToCanvas()
   this.tty = bc1.y  - cc.y + rect1!.getBoundingClientRect().height / 2;
   this.btx = bc2.x  - cc.x;
   this.bty = bc2.y  - cc.y + rect2!.getBoundingClientRect().height / 2;
-  
- 
   var ctx = canvas.getContext("2d");
   ctx!.font = this.topTextSize+" "+this.topTextFont;
   ctx!.fillStyle = this.topTextColor;

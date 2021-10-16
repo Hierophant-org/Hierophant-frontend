@@ -1,19 +1,42 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
-    <a class="navbar-brand" routerLink="/">User Portal</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+  <a class="navbar-brand" routerLink="/">User Portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <div *ngIf="userServ.getToken() != 'Bearer null'; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Main</a>
+          <a class="nav-link" routerLink="/create">
+            <mat-icon style="font-size: medium;">create</mat-icon>Create Post
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link">
+            <mat-icon style="font-size: medium;">
+              verified_user</mat-icon> h/{{ postCreation.getDecodedAccessToken().sub }}
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/register">Register</a>
+          <a class="nav-link" (click)="logOut()">
+            <mat-icon style="font-size: medium;">subdirectory_arrow_right</mat-icon>Log Out
+          </a>
         </li>
-      </ul>
-    </div>
-  </nav>
+      </ng-template>
+      <ng-template #elseBlock>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">
+            <mat-icon style="font-size: medium;">person</mat-icon>Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">
+            <mat-icon style="font-size: medium;"> list_alt</mat-icon>Register
+          </a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>

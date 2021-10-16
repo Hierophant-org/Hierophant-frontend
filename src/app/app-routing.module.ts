@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { MainComponent } from './components/main/main.component';
-import { PostComponent } from './components/post/post.component';
 import { GeneratorComponent } from './components/generator/generator.component';
 
 const routes: Routes = [

@@ -1,31 +1,39 @@
-<div>
-    <div>
-        <h2 class="card-header text-center">{{ title }}</h2>
-    </div>
-
-    <div class="card-body text-center">
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="inputTitle">Post Title</label>
-                    <input [(ngModel)]="post.title" type="text" name="title" class="form-control" id="inputTitle">
-
-                    <label for="inputTitle">Image Top Text</label>
-                    <input [(ngModel)]="image.topText" type="text" name="topText" class="form-control" id="inputTop">
-
-                    <label for="inputTitle">Image Bottom Text </label>
-                    <input [(ngModel)]="image.bottomText" type="text" name="bottomText" class="form-control"
-                        id="inputBottom">
-                </div>
+<div class="card">
+    <mat-tab-group>
+        <mat-tab label="Simple">
+            <div>
+                <h2 class="card-header text-center">{{ title }}</h2>
             </div>
-            <div class="overflow-auto ">
-                <div class="scrollmenu">
-                    <button *ngFor="let t of templates" class="template-image" (click)="setImageHtml(t)">
-                        <img src={{t}} alt="great meme template" height="150">
-                    </button>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary" (click)="createPost()">Share</button>
-        </form>
+            <div class="card-body text-center">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="inputTitle">Post Title</label>
+                            <input [(ngModel)]="post.title" type="text" name="title" class="form-control"
+                                id="inputTitle">
 
-    </div>
+                            <label for="inputTitle">Image Top Text</label>
+                            <input [(ngModel)]="image.topText" type="text" name="topText" class="form-control"
+                                id="inputTop">
+
+                            <label for="inputTitle">Image Bottom Text </label>
+                            <input [(ngModel)]="image.bottomText" type="text" name="bottomText" class="form-control"
+                                id="inputBottom">
+                        </div>
+                    </div>
+                    <div class="overflow-auto ">
+                        <div class="scrollmenu">
+                            <button *ngFor="let t of templates" class="template-image" (click)="setImageHtml(t)">
+                                <img src={{t}} alt="great meme template" height="150">
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="createPost()">Share</button>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Meme Generator">
+            <app-generator></app-generator>
+        </mat-tab>
+    </mat-tab-group>
+</div>
