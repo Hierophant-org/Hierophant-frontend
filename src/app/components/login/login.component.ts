@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.toastr.success(`Generating a token for ${this.user.username.toUpperCase()}!`, "Login Successful!");
   }
   public errorToastr() {
-    this.toastr.error("Some message", "Title");
+    this.toastr.error("Try again later", "Login Failed");
   }
   ngOnInit(): void {
   }

@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { Image } from 'src/app/models/image';
 import { PostCreationService } from 'src/app/services/post-creation.service';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,15 +22,16 @@ export class PostCreationComponent implements OnInit {
   user: User = new User(0, this.nameFromToken.sub, '', '', [], []);
   image: Image = new Image(0, "", "", "")
   post: Post = new Post(0, "", this.user, this.image, 0, [])
-  constructor(private postService: PostService, private postCreation: PostCreationService, private userService: UserService) { }
+  constructor(private postService: PostService, private postCreation: PostCreationService,private toastr: ToastrService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.testing();
+    this.getUserInfo();
   }
   public createPost(): void {
     this.postService.createPost(this.post)
       .subscribe(
-        data => { }
+        data => { this.successToastr();
+          this.router.navigate(['/home']);}
       )
   }
   setImageHtml(selectedHtml: string) {
@@ -36,10 +39,17 @@ export class PostCreationComponent implements OnInit {
     this.image.imgHtml = selectedHtml;
   }
 
-  public testing(): any {
+  public getUserInfo(): any {
     return this.userService.getUserInfo(this.nameFromToken.sub).subscribe(data => {
       this.user.userId = data.userId;
     })
+  }
+  
+  public successToastr() {
+    this.toastr.success(`Post ${this.post.title} created!`, "Creation Successful!");
+  }
+  public errorToastr() {
+    this.toastr.error("Something went wrong, please try again", "CreationFailed");
   }
 
 
