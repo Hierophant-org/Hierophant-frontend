@@ -66,3 +66,15 @@ mat-button-toggle {
     margin: auto !important;
     text-align: center !important;
 }
+
+.btn {
+    width: 30%;
+}
+
+.fetch-btn {
+    position: fixed;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 10%;
+}
