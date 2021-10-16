@@ -29,15 +29,22 @@ export class PostComponent implements OnInit {
   public findAllPosts() {
     const observable = forkJoin({
       p: this.postServ.findAllPosts(),
-      u: this.postServ.findAllPostUsers(),
+      //u: this.postServ.findPoster(p),
     }).subscribe(data => {
       this.posts = data.p;
-      this.users = data.u;
-      for (let index = 0; index < this.posts.length; index++) {
-        this.posts[index].userId = this.users[index];
-        this.numberOfUpvotes = data.p[index].upvotes;
-      }
+      console.log(data.p)
+      // this.users = data.u;
+      // for (let index = 0; index < this.posts.length; index++) {
+      //   this.posts[index].userId = this.users[index];
+      //   this.numberOfUpvotes = data.p[index].upvotes;
+      // }
       this.posts.forEach(pos => {
+        this.postServ.findPoster(pos.postId).subscribe(
+          data => {
+            pos.userId = data,
+            console.log(data)
+          }
+        );
         for (let index = 0; index < pos.comments.length; index++) {
           this.comServ.findWhoCommented(pos.comments[index].comId).subscribe(
             data => pos.comments[index].userId = data
@@ -49,6 +56,7 @@ export class PostComponent implements OnInit {
   }
 
   public onChange(event: { value: string; }, group: { value: string }, p: Post) {
+    console.log(p);
     if (this._activeValue === event.value) {
       // make unchecked
       this.numberOfUpvotes = (parseInt(event.value) - 1);
