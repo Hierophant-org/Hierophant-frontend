@@ -14,7 +14,7 @@ export class PostCreationService {
       return jwt_decode(this.token);
     }
     catch (Error) {
-      return null;
+      return "";
     }
   }
 }
