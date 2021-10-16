@@ -55,10 +55,10 @@ export class UserService { // this service is only responsible for one thing: ma
     return this.http.post<User>(`${url}/authenticate`, user, { responseType: 'text' as 'json', headers: { skip: "true" } })  // url, user, this.httpOptions
 
       .pipe( // we are calling a method on the data returned in the observable
+        catchError(this.handleError), // passing a callback
         tap((response: any) => {
           localStorage.setItem(this.TOKEN_NAME, response);
         }),
-        catchError(this.handleError) // passing a callback
       )
   }
 

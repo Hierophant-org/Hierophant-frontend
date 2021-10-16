@@ -19,7 +19,7 @@
                                 Comments
                             </mat-panel-title>
                             <mat-panel-description>
-                                {{panelOpenState ? '' : 'Click to see all comments'}}
+                                {{panelOpenState ? '' : ''}}
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <ul *ngFor="let c of p.comments" class="list-group">
@@ -30,7 +30,9 @@
                             </li>
                         </ul>
                         <br>
-                        <app-comment [parentPost]=p class="commentComponent"></app-comment>
+                        <div *ngIf="userServ.getToken() != 'Bearer null'; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock><app-comment [parentPost]=p class="commentComponent"></app-comment></ng-template>
+                        <ng-template #elseBlock><a href="/login"><button type="submit" class="btn btn-primary">Login to Comment!</button></a></ng-template>
                     </mat-expansion-panel>
                 </mat-accordion>
             </mat-card-content>
@@ -38,7 +40,7 @@
                 <mat-button-toggle-group #group="matButtonToggleGroup">
                     <mat-button-toggle class="upvote" value={{p.upvotes}} id={{p.postId}}
                         (change)="onChange($event, group, p)">
-                        <div *ngIf="p.upvotes >= 100;else other_content" class="upvotesAndIcon">
+                        <div *ngIf="p.upvotes >= 100; else other_content" class="upvotesAndIcon">
                             <span class="upvotesNumber">Upvotes: {{ p.upvotes }}</span>
                             <span class="material-icons">
                                 egg_alt
@@ -61,12 +63,15 @@
     <!-- </div> -->
     <div *ngIf="posts.length == 0" style="text-align: center">
         <!-- This element will only be present on the DOM IF there are no users in the array-->
+        <mat-card>
         <h5>{{ clientMessage.message }}</h5>
+        </mat-card>
     </div>
-    <div>
-        <button class="btn btn-secondary btn-center" (click)="findAllPosts()">Fetch Posts</button>
-    </div>
+    
 
 
 
+</div>
+<div>
+    <button class="btn btn-secondary btn-center fetch-btn" (click)="findAllPosts()">Fetch Posts</button>
 </div>

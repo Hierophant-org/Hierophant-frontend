@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
 import { ClientMessage } from 'src/app/models/client-message';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   title = "Login";
   public user = new User(0, '', '', '', [], []);
   public clientMessage = new ClientMessage('');
+  private readonly TOKEN_NAME = 'Hierophant Token';
 
   constructor(private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
