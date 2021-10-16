@@ -25,9 +25,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +45,6 @@ import { MatTabsModule } from '@angular/material/tabs';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-
     ToastrModule.forRoot({
       timeOut: 5000,
       progressBar: true,
@@ -63,6 +59,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatExpansionModule,
     MatTabsModule
   ],
+  // 
   providers: [AuthInterceptorProvider],
   exports: [FreeDraggingDirective],
   bootstrap: [AppComponent],
