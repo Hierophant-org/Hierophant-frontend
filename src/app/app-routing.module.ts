@@ -13,11 +13,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'create', component: PostCreationComponent},
-<<<<<<< HEAD
-  {path: 'generator', component: GeneratorComponent},
-=======
   {path: 'g', component: GeneratorComponent},
->>>>>>> main
   {path: '**', component: MainComponent}
 
 ];

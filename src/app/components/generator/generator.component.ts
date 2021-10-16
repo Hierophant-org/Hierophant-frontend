@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { HttpClient } from '@angular/common/http';
-
-=======
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { localUrl } from 'src/environments/environment';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { backendUrl } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
->>>>>>> main
+import { Observable } from 'rxjs';
 export class MEME
 {
   constructor(public title : String,public url : String)
@@ -18,10 +12,7 @@ export class MEME
   }
 }
 
-<<<<<<< HEAD
-=======
-const backendurl = `${localUrl}/s3`;
->>>>>>> main
+
 
 @Component({
   selector: 'app-generator',
@@ -34,22 +25,12 @@ export class GeneratorComponent implements OnInit {
 memes : MEME[] =[];  
 topText = '';
 bottomText = '';
-<<<<<<< HEAD
-topTextColor = '00000';
-bottomTextColor = '00000';
-=======
 topTextColor = 'black';
 bottomTextColor = 'black';
->>>>>>> main
 topTextSize =  '40px'; 
 bottomTextSize = '40px';
 topTextFont = 'Times New Roman';
 bottomTextFont = "Times New Roman";
-<<<<<<< HEAD
-ImageWidth = 0;
-ImageHeight = 0;
-image = new Image();
-=======
 ttx = 0;
 tty=0;
 btx=0;
@@ -58,10 +39,8 @@ ImageWidth = 0;
 ImageHeight = 0;
 image = new Image();
 file:any;
-bucket = 's3://hierophant-bucket/';
-secureUrl = '';
 
->>>>>>> main
+
 
 fileEvent:any;
 
@@ -94,10 +73,7 @@ console.log(e.type);
   
 
   this.fileEvent = e;
-<<<<<<< HEAD
-=======
   this.file = e.target.files[0];
->>>>>>> main
    console.log(e.target.files[0]);
     render.readAsDataURL(e.target.files[0]);
     render.onload = function ()
@@ -122,10 +98,7 @@ console.log(e.type);
  {
   if(e.target)
   {
-<<<<<<< HEAD
-=======
     this.file = e.target.url;
->>>>>>> main
   img.src = e.target.src as string;
   console.log(img.height , img.width);
       img = this.resizeImage(img);
@@ -212,26 +185,18 @@ changeFontOfBottomText(e:any)
 
 getMemes()
 {
-  this.http.get<any>("https://api.imgflip.com/get_memes").subscribe
+  ////*"https://api.imgflip.com/get_memes"*/
+  this.http.get<any>(  "http://alpha-meme-maker.herokuapp.com/1"   ).subscribe
   (
    response =>
    {
-    
+
      this.memes = response.data.memes;
-     
+     console.log(this.memes.toString());
    }
   );
 }
 
-<<<<<<< HEAD
-saveImage(e:any)
-{
-  console.log("savingImage...");
-  
-}
-
-
-=======
 addTextToCanvas()
 {
 
@@ -263,35 +228,88 @@ updateImage()
 
 
 
+
   
-  let canvas = this.ImageCanvas.nativeElement as HTMLCanvasElement;
-  //let canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
+  
+      // let file: File = this.file;
+      // let formData:FormData = new FormData();
+      // formData.append('myImage', file, file.name);
+      // let headers = new Headers();
+      // /** In Angular 5, including the header Content-Type can invalidate your request */
+      // headers.append('Content-Type', 'multipart/form-data');
+      // headers.append('Accept', 'application/json');
+      // let options = new RequestOptions({ headers: headers });
+      // this.http.post(`http://localhost:5000/images/UpImg`, formData, options)
+      //     .map(res => res.json())
+      //     .catch(error => Observable.throw(error))
+      //     .subscribe(
+      //         data => console.log('success'),
+      //         error => console.log(error)
+      //     )
+  
+
+  
+  // let canvas = this.ImageCanvas.nativeElement ;
+  // //let canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
+  // this.addTextToCanvas();
+  // //var canvasData = canvas.toDataURL("image/png");
+
+  // var fd = new FormData();
+  // let headers = new Headers();
+  // headers.append('Content-Type', 'multipart/form-data');
+  // headers.append('Accept', 'application/json');
+
+  //    let options = new RequestOptions({ headers: headers });
+  //    var blob = new Blob(canvas.toDataURL('images/jpg'), {type : 'application/json'});
+  //     let beelob = new File([blob], this.file.name);
+  //     console.log(beelob);
+  //   fd.append("myImage", beelob , this.file.name);
+     
+  //      console.log(fd)
+  //      this.http.post('localhost:5000/hierophant/images/uploadImage' , fd)
+  //           .map(res => res.json())
+  //           .catch(error => Observable.throw(error))
+  //           .subscribe(
+  //               data => console.log('success'),
+  //               error => console.log(error)
+  //      )
+    
+  
+  
+}
+
+uploadFile(){
+ let canvas = this.ImageCanvas.nativeElement ;
+   //canvas = document.getElementById("memeCanvas") as HTMLCanvasElement;
   this.addTextToCanvas();
   var canvasData = canvas.toDataURL("image/png");
   var fd = new FormData();
-  console.log('data : '+this.file.toString()+' : '+ this.file.name);
-  fd.append('myImage' , canvasData ,this.file.name);
-  this.http.post<any>("http://localhost:5000/hierophant/images/uploadImage" , fd).subscribe
-  (
-   res =>
-   {
-    
-     console.log(res);
-     
-   }
-  );
+  
+      let beelob = new File([ canvas.toDataURL("image/png")], this.file.name);
+       console.log(beelob);
+    fd.append("myImage", beelob );
 
+  ////******** */
+console.log("uploading Image...");
+  let formData = new FormData();
+  formData.append('myImage', this.file);
 
+  let params = new HttpParams();
+
+  const options = {
+    params: params,
+    reportProgress: false,
+  };
 
   
+  this.http.post('http://localhost:5000/hierophant/images/upLoad', fd, options).subscribe(
+    response=>
+    {
+      console.log(response.toString());
+    }
+  )
   
->>>>>>> main
 }
 
 
-
-<<<<<<< HEAD
-=======
-
 }
->>>>>>> main
