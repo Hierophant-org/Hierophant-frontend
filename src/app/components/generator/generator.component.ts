@@ -1,16 +1,10 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-
+import { GeneratorService } from 'src/app/services/generator.service';
 import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { backendUrl } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-export class MEME
-{
-  constructor(public title : String,public url : String)
-  {
-
-  }
-}
+import {Meme}from 'src/app/models/meme';
 
 @Component({
   selector: 'app-generator',
@@ -20,7 +14,7 @@ export class MEME
 export class GeneratorComponent implements OnInit {
   @ViewChild('memeCanvas', {static: false}) ImageCanvas:any;
 
-memes : MEME[] =[];  
+  memes:any;  
 topText = '';
 bottomText = '';
 topTextColor = 'black';
@@ -42,16 +36,11 @@ file:any;
 
 fileEvent:any;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient , private GService:GeneratorService) { }
 
-
-
-
-  
   ngOnInit(): void {
-    this.getMemes();
+    this.memes = this.GService.getMemes();
   } 
-
 
 drawImage(e:any )
 {
@@ -62,14 +51,8 @@ console.log(e);
  ctx.clearRect(0, 0, canvas.width, canvas.height);
  let render = new FileReader();
  let img = new Image();
-
-
-console.log(e.type);
  if(e.type == "change")
  {
-
-  
-
   this.fileEvent = e;
   this.file = e.target.files[0];
    console.log(e.target.files[0]);
@@ -77,17 +60,14 @@ console.log(e.type);
     render.onload = function ()
     { 
       img.src = render.result as string;
-      
           img.onload = function () 
           {
             if(e.target)
              {
-            
             console.log(img.height , img.width);
             ctx.drawImage(img , 0 , 0 , img.width, img.height);
              }
-          } 
-          
+          }  
     }
       console.log(this.ImageHeight , this.ImageWidth);
       this.resizeImage(img);    
@@ -100,7 +80,6 @@ console.log(e.type);
   img.src = e.target.src as string;
   console.log(img.height , img.width);
       img = this.resizeImage(img);
-      
       console.log(this.ImageHeight , this.ImageWidth);
       this.fileEvent = e;
        img.onload = function () 
@@ -117,14 +96,14 @@ else
 
 resizeImage(img:any)
 {
-  while(img.width > screen.width * 0.45|| img.height > screen.height * 0.75)
+  while(img.width > parent.innerWidth * 0.45|| img.height > parent.innerHeight * 0.75)
   {   
    
      img.width -= 1;
      img.height -= 1 ;
      
   }
-  while(img.width < screen.width * 0.45 && img.height < screen.height * 0.75)
+  while(img.width < parent.innerWidth  * 0.45 && img.height < parent.innerHeight  * 0.75)
   {   
    
      img.width += 1;
@@ -135,64 +114,33 @@ resizeImage(img:any)
   this.ImageHeight = img.height;
   return img;
 }
-
-
 changeColorOfTopText(e:any)
 {
-
 this.topTextColor = e.target.value;
-
-console.log("Changing top text color to ,  \n"+e.target.value);
 }
 changeColorOfBottomText(e:any)
 {
-
 this.bottomTextColor = e.target.value;
-
-console.log("Changing bottom text color to ,  \n"+e.target.value);
 }
 
 changeSizeOfTopText(e:any)
 {
-
 this.topTextSize = e.target.value+"px";
-console.log("Changing top text size to ,  \n"+this.topTextSize);
 }
 
 changeSizeOfBottomText(e:any)
 {
-  
   this.bottomTextSize = e.target.value+"px";
-  console.log("Changing bottom text size to ,  \n"+this.bottomTextSize);
 }
 
 changeFontOfTopText(e:any)
 {
-  
   this.topTextFont = e.target.value;
-  console.log("Changing top text font to ,  \n"+this.topTextFont);
 }
 
 changeFontOfBottomText(e:any)
 {
-  
   this.bottomTextFont = e.target.value;
-  console.log("Changing bottom text font to ,  \n"+this.bottomTextFont);
-}
-
-
-getMemes()
-{
-  
-  this.http.get<any>(  "https://api.imgflip.com/get_memes" ).subscribe
-  (
-   response =>
-   {
-
-     this.memes = response.data.memes;
-     console.log(this.memes.toString());
-   }
-  );
 }
 
 addTextToCanvas()
@@ -218,33 +166,13 @@ addTextToCanvas()
 
 }
 
-
-
 uploadFile(){
+
   let canvas = this.ImageCanvas.nativeElement ;
   this.addTextToCanvas();
-  var canvasData = canvas.toDataURL("image/png");
-  var fd = new FormData();
-  
       let beelob = new File([ canvas.toDataURL("image/png")], this.file.name);
        console.log(beelob);
-    fd.append("myImage", beelob );
-  let formData = new FormData();
-  formData.append('myImage', this.file);
-  let params = new HttpParams();
-  const options = {
-    params: params,
-    reportProgress: false,
-  };
-
-  
-  this.http.post('http://localhost:5000/hierophant/images/upLoad', fd, options).subscribe(
-    response=>
-    {
-      console.log(response.toString());
-    }
-  )
-  
+       this.GService.uploadImageFile(beelob)
 }
 
 
