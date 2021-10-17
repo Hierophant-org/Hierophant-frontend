@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,17 +7,9 @@ import { Injectable } from '@angular/core';
 
 export class GeneratorService {
 
-
   constructor(private http: HttpClient) { }
-  // 'Content-Type': 'application/json',
-  httpOptions = {
-    headers: new HttpHeaders({
-
-    })
-  }
 
   public getMemes() {
-    console.log("calling api endpoint")
     return this.http.get<any>("https://api.imgflip.com/get_memes").pipe();
   }
 

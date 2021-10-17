@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { PostCreationService } from 'src/app/services/post-creation.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,11 +8,22 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit {
-  constructor(public userServ: UserService, public postCreation: PostCreationService) { }
-  ngOnInit(): void {
-  }
+
+export class NavComponent {
+
+  constructor(public userServ: UserService, public postCreation: PostCreationService, private toastr: ToastrService) { }
+
   public logOut(): void {
     localStorage.removeItem('Hierophant Token');
   }
+  public successToastr() {
+    this.toastr.success("Sorry to see you go :C", "Log out Successful!");
+  }
+
+  public callingMultiple() {
+    this.logOut();
+    this.successToastr();
+  }
 }
+
+

@@ -1,6 +1,15 @@
 .card {
     background: linear-gradient(0deg, #2b5876, #4e4376) !important;
-    /* 2b5876 4e4376 */
     color: #fff !important;
     box-shadow: 0 1px 5px 10px rgb(0 0 0 / 0.2) !important;
+}
+
+#inputPassword4 {
+    color: aliceblue;
+    background-color: rgb(24, 26, 27);
+}
+
+#inputUsername {
+    color: aliceblue;
+    background-color: rgb(24, 26, 27);
 }

@@ -1,5 +1,4 @@
 export class Image {
-
     imageId: number;
     imgHtml: string;
     topText: string;
@@ -16,5 +15,4 @@ export class Image {
         this.topText = topText
         this.bottomText = bottomText
     }
-
 }

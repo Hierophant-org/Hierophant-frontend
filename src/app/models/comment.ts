@@ -1,7 +1,6 @@
 import { User } from './user'
 import { Post } from './post';
 export class Comment {
-
     comId: number;
     userId: User;
     postId: Post;
@@ -21,5 +20,4 @@ export class Comment {
         this.commText = commText
         this.upvotes = upvotes
     }
-
 }

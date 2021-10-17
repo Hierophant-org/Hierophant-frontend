@@ -27,3 +27,50 @@ div.scrollmenu a:hover {
   color: #fff !important;
   box-shadow: 0 1px 5px 10px rgb(0 0 0 / 0.2) !important;
 }
+
+/* HIDE RADIO */
+
+[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+
+[type=radio]+img {
+  cursor: pointer;
+  margin: 3px;
+}
+
+/* CHECKED STYLES */
+
+[type=radio]:checked+img {
+  outline: 5px solid green;
+}
+
+#inputTitle {
+  color: aliceblue;
+  background-color: rgb(24, 26, 27);
+}
+
+#inputTop {
+  color: aliceblue;
+  background-color: rgb(24, 26, 27);
+}
+
+#inputBottom {
+  color: aliceblue;
+  background-color: rgb(24, 26, 27);
+}
+
+.under-construction {
+  display: block;
+  width: 75%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border: 1px solid grey;
+  box-shadow: 0 1px 5px 10px rgb(0 0 0 / 0.2);
+}

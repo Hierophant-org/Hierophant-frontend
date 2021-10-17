@@ -1,7 +1,6 @@
 import { Post } from 'src/app/models/post';
 import { Comment } from './comment';
 export class User {
-
     userId: number;
     username: string;
     password: string;
@@ -24,5 +23,4 @@ export class User {
         this.comments = comments
         this.posts = posts
     }
-
 }

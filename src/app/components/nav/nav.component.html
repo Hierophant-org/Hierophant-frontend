@@ -14,13 +14,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">
+          <a class="nav-link" routerLink="">
             <mat-icon style="font-size: medium;">
               verified_user</mat-icon> h/{{ postCreation.getDecodedAccessToken().sub }}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="logOut()">
+          <a class="nav-link" routerLink="/" (click)="callingMultiple()">
             <mat-icon style="font-size: medium;">subdirectory_arrow_right</mat-icon>Log Out
           </a>
         </li>

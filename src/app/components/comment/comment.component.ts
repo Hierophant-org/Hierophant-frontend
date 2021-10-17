@@ -8,8 +8,6 @@ import { CommentService } from 'src/app/services/comment.service';
 import { PostCreationService } from 'src/app/services/post-creation.service';
 import { UserService } from 'src/app/services/user.service';
 
-
-
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -17,11 +15,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class CommentComponent implements OnInit {
-  @Input() parentPost !: Post
+
+  @Input() parentPost !: Post;
+
   nameFromToken: any = this.postCreation.getDecodedAccessToken();
   user: User = new User(0, this.nameFromToken.sub, '', '', [], []);
   public comment = new Comment(0, this.user, this.parentPost, '', 0);
-  constructor(private postCreation: PostCreationService, private userService: UserService, private commentService: CommentService,private toastr: ToastrService, private router: Router) {}
+
+  constructor(private postCreation: PostCreationService, private userService: UserService, private commentService: CommentService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.getUserId()
@@ -34,19 +35,15 @@ export class CommentComponent implements OnInit {
   }
 
   public insertComment() {
-    console.log(`the post is ${this.parentPost.postId}`);
-    console.log(`the comment is ${this.comment.commText}`);
     this.comment.postId = this.parentPost;
     this.commentService.createComment(this.comment)
-      .subscribe( // subscribe to the data returned and do something like generate client message
+      .subscribe(
         (data => {
-          console.log(`success ${data}`),
           this.successToastr(),
-          this.router.navigate(['/home'])
+            this.router.navigate(['/home'])
         }),
         (error => {
           this.errorToastr();
-          console.log(`failed ${error}`)
         })
       )
   }
@@ -56,5 +53,4 @@ export class CommentComponent implements OnInit {
   public errorToastr() {
     this.toastr.error("Something went wrong, try again later", "Comment unsuccessful");
   }
-
 }
