@@ -59,7 +59,6 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatExpansionModule,
     MatTabsModule
   ],
-  // 
   providers: [AuthInterceptorProvider],
   exports: [FreeDraggingDirective],
   bootstrap: [AppComponent],

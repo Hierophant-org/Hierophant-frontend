@@ -78,3 +78,31 @@ mat-button-toggle {
     transform: translate(-50%, 0);
     width: 10%;
 }
+
+/* Container holding the image and the text */
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/* Bottom left text */
+
+.bottom-left {
+    position: absolute;
+    bottom: 1em;
+    width: 100%;
+    font-size: 5em;
+    color: gray;
+}
+
+/* Top left text */
+
+.top-left {
+    position: absolute;
+    top: 1em;
+    width: 100%;
+    font-size: 5em;
+    color: gray;
+}

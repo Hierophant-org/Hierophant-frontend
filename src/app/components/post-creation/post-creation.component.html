@@ -11,11 +11,9 @@
                             <label for="inputTitle">Post Title</label>
                             <input [(ngModel)]="post.title" type="text" name="title" class="form-control"
                                 id="inputTitle">
-
                             <label for="inputTitle">Image Top Text</label>
                             <input [(ngModel)]="image.topText" type="text" name="topText" class="form-control"
                                 id="inputTop">
-
                             <label for="inputTitle">Image Bottom Text </label>
                             <input [(ngModel)]="image.bottomText" type="text" name="bottomText" class="form-control"
                                 id="inputBottom">
@@ -23,16 +21,10 @@
                     </div>
                     <div class="overflow-auto ">
                         <div class="scrollmenu">
-
                             <label *ngFor="let t of memes">
                                 <input type="radio" name="test" value="small" checked (click)="setImageHtml(t.url)">
                                 <img [src]=t.url alt="great meme template" height="150">
                             </label>
-
-
-                            <!-- <button *ngFor="let t of memes" class="template-image" (click)="setImageHtml(t.url)">
-                                <img [src]=t.url alt="great meme template" height="150">
-                            </button> -->
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" (click)="createPost()">Share</button>
@@ -40,7 +32,8 @@
             </div>
         </mat-tab>
         <mat-tab label="Meme Generator">
-            <app-generator></app-generator>
+            <img src="https://i.imgflip.com/5qpakn.jpg" alt="Under Construction!" class="under-construction">
+            <!-- <app-generator></app-generator> -->
         </mat-tab>
     </mat-tab-group>
 </div>

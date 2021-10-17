@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ClientMessage } from 'src/app/models/client-message';
@@ -11,11 +11,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+
+export class RegisterComponent {
+
   title = "Register User";
   value: number = 0;
   public user = new User(0, '', '', '', [], []);
   public clientMessage = new ClientMessage('');
+
   constructor(private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
   public registerUser(): void {
@@ -39,7 +42,7 @@ export class RegisterComponent implements OnInit {
     }
     else {
       this.userService.registerUser(this.user)
-        .subscribe( // subscribe to the data returned and do something like generate client message
+        .subscribe(
           (data => {
             this.successToastr();
             this.router.navigate(['/login']);
@@ -54,6 +57,7 @@ export class RegisterComponent implements OnInit {
   public successToastr() {
     this.toastr.success(`${this.user.username} please login!`, "Register Successful!");
   }
+
   public errorToastr(value: number) {
     switch (value) {
       case 401:
@@ -73,8 +77,4 @@ export class RegisterComponent implements OnInit {
         break;
     }
   }
-
-  ngOnInit(): void {
-  }
-
 }

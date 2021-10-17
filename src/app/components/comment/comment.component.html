@@ -1,14 +1,9 @@
-<!-- <div class="commentButton">
-  <form>
-    <input ([ngModel])="comment.commText" type="text" name="commText">
-    <button type="submit" class="btn btn-primary" (click)="insertComment()">Comment</button>
-  </form>
-</div> -->
 <form>
   <div class="form-row">
     <div class="form-group col-md-12">
-      <input [(ngModel)]="comment.commText" type="text" name="commText" class="form-control" id="inputUsername" placeholder="Leave a comment..." maxlength="250" />
+      <input [(ngModel)]="comment.commText" type="text" name="commText" class="form-control" id="inputUsername"
+        placeholder="Leave a comment..." maxlength="250" />
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="insertComment()">Comment</button>
+  <button type="submit" class="btn btn-primary" (click)="insertComment()" routerLink="/">Comment</button>
 </form>

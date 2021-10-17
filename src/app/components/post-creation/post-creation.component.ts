@@ -10,21 +10,21 @@ import { Router } from '@angular/router';
 import { GeneratorService } from 'src/app/services/generator.service';
 import { Meme } from 'src/app/models/meme';
 
-
 @Component({
   selector: 'app-post-creation',
   templateUrl: './post-creation.component.html',
   styleUrls: ['./post-creation.component.css']
 })
+
 export class PostCreationComponent implements OnInit {
   title = "Create Post";
   memes: Meme[] = [];
   selectedImage: String = "";
-  templates: string[] = ["https://imgflip.com/s/meme/Drake-Hotline-Bling.jpg", "https://imgflip.com/s/meme/Distracted-Boyfriend.jpg"];
   nameFromToken: any = this.postCreation.getDecodedAccessToken();
   user: User = new User(0, this.nameFromToken.sub, '', '', [], []);
   image: Image = new Image(0, "", "", "")
   post: Post = new Post(0, "", this.user, this.image, 0, [])
+
   constructor(private postService: PostService, private postCreation: PostCreationService, private toastr: ToastrService, private userService: UserService, private router: Router, private generatorService: GeneratorService) { }
 
   ngOnInit(): void {
@@ -32,30 +32,34 @@ export class PostCreationComponent implements OnInit {
     this.getMemes();
   }
 
-
   public getMemes() {
     this.generatorService.getMemes().subscribe(
       response => {
-        console.log("getting response from api")
         this.memes = response.data.memes;
       }
     )
   }
 
-
-
-
   public createPost(): void {
-    this.postService.createPost(this.post)
-      .subscribe(
-        data => {
-          this.successToastr();
-          this.router.navigate(['/home']);
-        }
-      )
+    this.userService.checkTokenValidation().subscribe(data => {
+      if (localStorage.getItem('Hierophant Token') && data === "passed checking gate") {
+        this.postService.createPost(this.post)
+          .subscribe(
+            data => {
+              this.successToastr();
+              this.router.navigate(['/home']);
+            }
+          )
+      }
+      else {
+        this.errorToastr();
+        this.router.navigate(['/login']);
+        localStorage.removeItem('Hierophant Token');
+      }
+    });
   }
-  setImageHtml(selectedHtml: string) {
-    // populate all fields
+
+  public setImageHtml(selectedHtml: string) {
     this.image.imgHtml = selectedHtml;
   }
 
@@ -68,10 +72,8 @@ export class PostCreationComponent implements OnInit {
   public successToastr() {
     this.toastr.success(`Post ${this.post.title} created!`, "Creation Successful!");
   }
+
   public errorToastr() {
-    this.toastr.error("Something went wrong, please try again", "CreationFailed");
+    this.toastr.error("Cannot create post with modified token", "CreationFailed");
   }
-
-
-
 }
