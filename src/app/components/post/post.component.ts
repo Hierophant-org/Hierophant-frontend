@@ -52,23 +52,26 @@ export class PostComponent implements OnInit {
   }
 
   public onChange(event: { value: string; }, group: { value: string }, p: Post) {
-    if (this.userServ.getToken() != 'Bearer null') {
-      if (this._activeValue === event.value) {
-        this.numberOfUpvotes = (parseInt(event.value) - 1);
-        p.upvotes = this.numberOfUpvotes;
-        this.postServ.updateVotes(p).subscribe();
-        group.value = "";
-      } else {
-        this._activeValue = event.value;
-        this.numberOfUpvotes = (parseInt(event.value) + 1);
-        p.upvotes = this.numberOfUpvotes;
-        this.postServ.updateVotes(p).subscribe();
-        this._activeValue = (parseInt(event.value) + 1).toString();
+    this.userServ.checkTokenValidation().subscribe(data => {
+      if (localStorage.getItem('Hierophant Token') && data === "passed checking gate") {
+        if (this._activeValue === event.value) {
+          this.numberOfUpvotes = (parseInt(event.value) - 1);
+          p.upvotes = this.numberOfUpvotes;
+          this.postServ.updateVotes(p).subscribe();
+          group.value = "";
+        } else {
+          this._activeValue = event.value;
+          this.numberOfUpvotes = (parseInt(event.value) + 1);
+          p.upvotes = this.numberOfUpvotes;
+          this.postServ.updateVotes(p).subscribe();
+          this._activeValue = (parseInt(event.value) + 1).toString();
+        }
       }
-    }
-    else {
-      this.errorToastr();
-    }
+      else {
+        this.errorToastr();
+        localStorage.removeItem('Hierophant Token');
+      }
+    });
   }
   public errorToastr() {
     this.toastr.error("Login to upvote!", "Oops");
