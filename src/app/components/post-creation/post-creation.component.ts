@@ -29,16 +29,16 @@ export class PostCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.getMemes();
+   /// this.getMemes();
   }
 
-  public getMemes() {
-    this.generatorService.getMemes().subscribe(
-      response => {
-        this.memes = response.data.memes;
-      }
-    )
-  }
+  // public getMemes() {
+  //   this.generatorService.getMemes().subscribe(
+  //     response => {
+  //       this.memes = response.data.memes;
+  //     }
+  //   )
+  // }
 
   public createPost(): void {
     this.userService.checkTokenValidation().subscribe(data => {
@@ -58,15 +58,9 @@ export class PostCreationComponent implements OnInit {
       }
     });
   }
-<<<<<<< HEAD
-  setImageHtml(selectedHtml: string) {
-    // populate all fields
-    this.image.pic = selectedHtml;
-=======
 
   public setImageHtml(selectedHtml: string) {
     this.image.imgHtml = selectedHtml;
->>>>>>> fcef37f4daaf3eb311c9afc8c1ac1c8c256c363f
   }
 
   public getUserInfo(): any {

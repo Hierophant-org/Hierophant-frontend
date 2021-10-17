@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-=======
-import { HttpClient } from '@angular/common/http';
->>>>>>> fcef37f4daaf3eb311c9afc8c1ac1c8c256c363f
 import { Injectable } from '@angular/core';
 import {Meme}from 'src/app/models/meme';
 import { Post } from '../models/post';
@@ -19,7 +15,6 @@ import { Router } from '@angular/router';
 export class GeneratorService {
   memes!: Meme[];
 
-<<<<<<< HEAD
   constructor(private http: HttpClient, private postCreation: PostCreationService, private postService: PostService, private UService: UserService , private router: Router) { }
   // 'Content-Type': 'application/json',
   httpOptions = {
@@ -28,13 +23,6 @@ export class GeneratorService {
     })
   }
 
-=======
-  constructor(private http: HttpClient) { }
-
-  public getMemes() {
-    return this.http.get<any>("https://api.imgflip.com/get_memes").pipe();
-  }
->>>>>>> fcef37f4daaf3eb311c9afc8c1ac1c8c256c363f
 
 
   uploadImageFile(file:any){ 
