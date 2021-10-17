@@ -106,3 +106,10 @@ mat-button-toggle {
     font-size: 5em;
     color: gray;
 }
+
+.copyright {
+    position: fixed;
+    bottom: 0%;
+    right: 1%;
+    color: white;
+}
