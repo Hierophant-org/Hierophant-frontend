@@ -43,13 +43,19 @@ export class PostCreationComponent implements OnInit {
   public createPost(): void {
     this.userService.checkTokenValidation().subscribe(data => {
       if (localStorage.getItem('Hierophant Token') && data === "passed checking gate") {
-        this.postService.createPost(this.post)
-          .subscribe(
-            data => {
-              this.successToastr();
-              this.router.navigate(['/home']);
-            }
-          )
+        // check for empty fields logic
+        if (this.post.title == "" || this.image.topText == "" || this.image.bottomText == "") {
+          this.errorToastr2();
+        }
+        else {
+          this.postService.createPost(this.post)
+            .subscribe(
+              data => {
+                this.successToastr();
+                this.router.navigate(['/home']);
+              }
+            )
+        }
       }
       else {
         this.errorToastr();
@@ -74,6 +80,10 @@ export class PostCreationComponent implements OnInit {
   }
 
   public errorToastr() {
-    this.toastr.error("Cannot create post with modified token", "CreationFailed");
+    this.toastr.error("Cannot create post with modified token", "Creation Failed");
+  }
+
+  public errorToastr2() {
+    this.toastr.error("Cannot create post with empty fields", "Creation Failed");
   }
 }

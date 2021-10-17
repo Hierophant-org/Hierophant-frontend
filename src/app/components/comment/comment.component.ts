@@ -35,17 +35,43 @@ export class CommentComponent implements OnInit {
   }
 
   public insertComment() {
-    this.comment.postId = this.parentPost;
-    this.commentService.createComment(this.comment)
-      .subscribe(
-        (data => {
-          this.successToastr(),
-            this.router.navigate(['/home'])
-        }),
-        (error => {
-          this.errorToastr();
-        })
-      )
+
+
+    this.userService.checkTokenValidation().subscribe(data => {
+      if (localStorage.getItem('Hierophant Token') && data === "passed checking gate") {
+        this.comment.postId = this.parentPost;
+        this.commentService.createComment(this.comment)
+          .subscribe(
+            (data => {
+              this.successToastr(),
+                this.router.navigate(['/home'])
+            }),
+            (error => {
+              this.errorToastr();
+            })
+          )
+      }
+      else {
+        this.errorToastr();
+        localStorage.removeItem('Hierophant Token');
+      }
+    });
+
+
+
+
+
+    // this.comment.postId = this.parentPost;
+    // this.commentService.createComment(this.comment)
+    //   .subscribe(
+    //     (data => {
+    //       this.successToastr(),
+    //         this.router.navigate(['/home'])
+    //     }),
+    //     (error => {
+    //       this.errorToastr();
+    //     })
+    //   )
   }
   public successToastr() {
     this.toastr.success(`Comment posted`, "Comment Successful!");
