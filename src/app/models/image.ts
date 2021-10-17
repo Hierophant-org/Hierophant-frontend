@@ -1,20 +1,25 @@
 export class Image {
-
+    
     imageId: number;
-    imgHtml: string;
-    topText: string;
-    bottomText: string;
+    name:string;
+    pic:string;
+    type:string;
+    imgHtml:string;
 
     constructor(
+        
         imageId: number,
-        imgHtml: string,
-        topText: string,
-        bottomText: string
+        name: string,
+        pic: string,
+        type:string,
+        imgHtml:string
     ) {
+        
         this.imageId = imageId
+        this.name = name
+        this.pic = pic
+        this.type = type
         this.imgHtml = imgHtml
-        this.topText = topText
-        this.bottomText = bottomText
     }
 
 }

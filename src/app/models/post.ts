@@ -8,6 +8,7 @@ export class Post {
     image: Image;
     upvotes: number;
     comments: Comment[];
+  post: any;
 
     constructor(
         postId: number,

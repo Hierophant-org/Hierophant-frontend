@@ -5,6 +5,8 @@ import { backendUrl } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {Meme}from 'src/app/models/meme';
+import { getLocaleMonthNames } from '@angular/common';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-generator',
@@ -14,7 +16,8 @@ import {Meme}from 'src/app/models/meme';
 export class GeneratorComponent implements OnInit {
   @ViewChild('memeCanvas', {static: false}) ImageCanvas:any;
 
-  memes:any;  
+memes:any;  
+PostTitle:string = '';
 topText = '';
 bottomText = '';
 topTextColor = 'black';
@@ -39,7 +42,7 @@ fileEvent:any;
   constructor(private http:HttpClient , private GService:GeneratorService) { }
 
   ngOnInit(): void {
-    this.memes = this.GService.getMemes();
+    this.getMemes();
   } 
 
 drawImage(e:any )
@@ -74,18 +77,26 @@ console.log(e);
  }
  else if(e.type == "click")
  {
+   
   if(e.target)
   {
-    this.file = e.target.url;
-  img.src = e.target.src as string;
-  console.log(img.height , img.width);
+    let name:any[] = e.target.src.split("/");
+    console.log("name:"+name);
+    this.file = name[name.length -1];
       img = this.resizeImage(img);
+      img.crossOrigin = '';
+      img.src = e.target.src;
       console.log(this.ImageHeight , this.ImageWidth);
       this.fileEvent = e;
-       img.onload = function () 
-       {
-         ctx.drawImage(img , 0 , 0 , img.width , img.height);
-       } 
+          img.onload = function () 
+          {
+            if(e.target)
+             {
+            console.log(img.height , img.width);
+            ctx.drawImage(img , 0 , 0 , img.width, img.height);
+             }
+          }  
+    
   }
 }
 else
@@ -114,14 +125,6 @@ resizeImage(img:any)
   this.ImageHeight = img.height;
   return img;
 }
-changeColorOfTopText(e:any)
-{
-this.topTextColor = e.target.value;
-}
-changeColorOfBottomText(e:any)
-{
-this.bottomTextColor = e.target.value;
-}
 
 changeSizeOfTopText(e:any)
 {
@@ -133,15 +136,7 @@ changeSizeOfBottomText(e:any)
   this.bottomTextSize = e.target.value+"px";
 }
 
-changeFontOfTopText(e:any)
-{
-  this.topTextFont = e.target.value;
-}
 
-changeFontOfBottomText(e:any)
-{
-  this.bottomTextFont = e.target.value;
-}
 
 addTextToCanvas()
 {
@@ -170,10 +165,28 @@ uploadFile(){
 
   let canvas = this.ImageCanvas.nativeElement ;
   this.addTextToCanvas();
-      let beelob = new File([ canvas.toDataURL("image/png")], this.file.name);
-       console.log(beelob);
-       this.GService.uploadImageFile(beelob)
+      let blob = new File([ canvas.toDataURL("image/png")], this.PostTitle);
+       console.log(blob);
+       this.GService.uploadImageFile(blob)
 }
 
 
+getMemes()
+{
+  this.http.get<any>(  "https://api.imgflip.com/get_memes" ).subscribe
+  (
+   response =>
+   {
+      
+     this.memes =  response.data.memes;
+   }
+  );
 }
+
+
+
+
+}
+
+
+

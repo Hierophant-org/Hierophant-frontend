@@ -20,7 +20,7 @@ export class PostCreationComponent implements OnInit {
   templates: string[] = ["https://imgflip.com/s/meme/Drake-Hotline-Bling.jpg", "https://imgflip.com/s/meme/Distracted-Boyfriend.jpg"];
   nameFromToken: any = this.postCreation.getDecodedAccessToken();
   user: User = new User(0, this.nameFromToken.sub, '', '', [], []);
-  image: Image = new Image(0, "", "", "")
+  image: Image = new Image(0, "", "", "","")
   post: Post = new Post(0, "", this.user, this.image, 0, [])
   constructor(private postService: PostService, private postCreation: PostCreationService,private toastr: ToastrService, private userService: UserService, private router: Router) { }
 
@@ -36,7 +36,7 @@ export class PostCreationComponent implements OnInit {
   }
   setImageHtml(selectedHtml: string) {
     // populate all fields
-    this.image.imgHtml = selectedHtml;
+    this.image.pic = selectedHtml;
   }
 
   public getUserInfo(): any {

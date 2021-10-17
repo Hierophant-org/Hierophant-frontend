@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode';
 export class PostCreationService {
   token: string = "";
   constructor() { }
-
+  
   getDecodedAccessToken(): any {
     try {
       this.token = localStorage.getItem('Hierophant Token') || '{}';
