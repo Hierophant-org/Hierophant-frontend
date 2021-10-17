@@ -1,5 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary">
-  <a class="navbar-brand" routerLink="/">User Portal</a>
+  <a class="navbar-brand" routerLink="/"><img src="https://raw.githubusercontent.com/Nathan-M-Lee/images/main/images/pngegg.png" alt="LOGO" class="logo">
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,13 +15,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">
+          <a class="nav-link" routerLink="">
             <mat-icon style="font-size: medium;">
               verified_user</mat-icon> h/{{ postCreation.getDecodedAccessToken().sub }}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="logOut()">
+          <a class="nav-link" routerLink="/" (click)="callingMultiple()">
             <mat-icon style="font-size: medium;">subdirectory_arrow_right</mat-icon>Log Out
           </a>
         </li>

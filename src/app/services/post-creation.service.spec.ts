@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { PostCreationService } from './post-creation.service';
 
 describe('PostCreationService', () => {

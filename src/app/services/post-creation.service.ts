@@ -5,7 +5,9 @@ import jwt_decode from 'jwt-decode';
   providedIn: 'root'
 })
 export class PostCreationService {
+
   token: string = "";
+
   constructor() { }
   
   getDecodedAccessToken(): any {

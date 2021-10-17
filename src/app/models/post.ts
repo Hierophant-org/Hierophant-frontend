@@ -25,5 +25,4 @@ export class Post {
         this.upvotes = upvotes
         this.comments = comments
     }
-
 }

@@ -72,3 +72,9 @@ mat-card-header {
 .userComment {
     margin-left: 15px;
 }
+
+@media (max-width: 1000px) {
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+        width: 100% !important;
+    }
+}

@@ -1,5 +1,8 @@
 export class Image {
+<<<<<<< HEAD
     
+=======
+>>>>>>> fcef37f4daaf3eb311c9afc8c1ac1c8c256c363f
     imageId: number;
     name:string;
     pic:string;
@@ -21,5 +24,4 @@ export class Image {
         this.type = type
         this.imgHtml = imgHtml
     }
-
 }
