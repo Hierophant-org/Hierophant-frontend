@@ -94,7 +94,7 @@ mat-button-toggle {
     bottom: 1em;
     width: 100%;
     font-size: 5em;
-    color: gray;
+    color: gold;
 }
 
 /* Top left text */
@@ -104,7 +104,7 @@ mat-button-toggle {
     top: 1em;
     width: 100%;
     font-size: 5em;
-    color: gray;
+    color: gold;
 }
 
 .copyright {
