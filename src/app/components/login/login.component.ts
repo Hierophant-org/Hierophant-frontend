@@ -23,8 +23,14 @@ export class LoginComponent {
     this.userService.loginUser(this.user)
       .subscribe(
         (data => {
-          this.successToastr();
-          this.router.navigate(['/']);
+          if (localStorage.getItem('Hierophant Token') === null) {
+            this.errorToastr();
+            localStorage.removeItem('Hierophant Token');
+          }
+          else {
+            this.successToastr();
+            this.router.navigate(['/']);
+          }
         }),
         (error => {
           this.errorToastr();

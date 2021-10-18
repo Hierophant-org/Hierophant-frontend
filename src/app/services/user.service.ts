@@ -30,7 +30,12 @@ export class UserService { // this service is only responsible for one thing: ma
     return this.http.post<User>(`${url}/authenticate`, user, { responseType: 'text' as 'json', headers: { skip: "true" } })
       .pipe(
         tap((response: any) => {
-          localStorage.setItem(this.TOKEN_NAME, response);
+          if (response == "No token") {
+            null
+          }
+          else {
+            localStorage.setItem(this.TOKEN_NAME, response);
+          }
         }),
       )
   }
